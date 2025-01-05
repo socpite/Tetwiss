@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://cwensks5asunm"]
 
-[ext_resource type="Texture2D" uid="uid://capn7wain57ar" path="res://assets/square_set.png" id="1_gh6g0"]
-[ext_resource type="Script" path="res://tile_map.gd" id="2_gse5h"]
-[ext_resource type="Texture2D" uid="uid://wyve4t5bny04" path="res://assets/square_background.png" id="2_kl8ow"]
-[ext_resource type="Script" path="res://PieceQueue.gd" id="3_mcdbq"]
-[ext_resource type="Script" path="res://InputHandler.gd" id="3_ymcug"]
-[ext_resource type="Script" path="res://Score.gd" id="6_luysm"]
+[ext_resource type="Texture2D" uid="uid://capn7wain57ar" path="res://assets/square_set.png" id="1_ks840"]
+[ext_resource type="Texture2D" uid="uid://wyve4t5bny04" path="res://assets/square_background.png" id="2_n1ddr"]
+[ext_resource type="Script" path="res://scripts/tile_map.gd" id="3_867pe"]
+[ext_resource type="Script" path="res://scripts/PieceQueue.gd" id="4_27gu6"]
+[ext_resource type="Script" path="res://scripts/InputHandler.gd" id="5_8fh7r"]
+[ext_resource type="Script" path="res://scripts/Score.gd" id="6_t7k3w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2c3e3"]
-texture = ExtResource("1_gh6g0")
+texture = ExtResource("1_ks840")
 texture_region_size = Vector2i(8, 8)
 0:0/next_alternative_id = 8
 0:0/0 = 0
@@ -28,7 +28,7 @@ texture_region_size = Vector2i(8, 8)
 0:0/7/modulate = Color(1, 0.498039, 0, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3pvtj"]
-texture = ExtResource("2_kl8ow")
+texture = ExtResource("2_n1ddr")
 texture_region_size = Vector2i(8, 8)
 0:0/0 = 0
 
@@ -53,15 +53,15 @@ layer_3/name = "current_piece"
 layer_3/tile_data = PackedInt32Array()
 layer_4/name = "HUD"
 layer_4/tile_data = PackedInt32Array()
-script = ExtResource("2_gse5h")
+script = ExtResource("3_867pe")
 
 [node name="PieceDropTimer" type="Timer" parent="."]
 
 [node name="PieceQueue" type="Node" parent="."]
-script = ExtResource("3_mcdbq")
+script = ExtResource("4_27gu6")
 
 [node name="InputHandler" type="Node" parent="."]
-script = ExtResource("3_ymcug")
+script = ExtResource("5_8fh7r")
 
 [node name="DASLeftTimer" type="Timer" parent="InputHandler"]
 
@@ -80,7 +80,7 @@ offset_right = 68.0
 offset_bottom = -1.5
 text = "0"
 horizontal_alignment = 1
-script = ExtResource("6_luysm")
+script = ExtResource("6_t7k3w")
 
 [connection signal="timeout" from="PieceDropTimer" to="." method="_on_piece_drop_timer_timeout"]
 [connection signal="hard_drop" from="InputHandler" to="." method="hard_drop"]

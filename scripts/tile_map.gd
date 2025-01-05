@@ -1,6 +1,6 @@
 extends TileMap
 
-var piece_scene = preload("res://piece.tscn")
+var piece_scene = preload("res://scene/piece.tscn")
 var current_piece = piece_scene.instantiate()
 var holding_piece = piece_scene.instantiate()
 
