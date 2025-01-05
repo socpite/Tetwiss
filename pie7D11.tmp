@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dltjneejmm52r"]
+
+[ext_resource type="Script" path="res://Piece.gd" id="1_abs3m"]
+
+[node name="Piece" type="Node"]
+script = ExtResource("1_abs3m")
+grid = null
+grid_size = null
+position = null
+piece_id = null
+piece_name = null
+current_rotation = null
+clockwise_kicktable = null
+counterclockwise_kicktable = null

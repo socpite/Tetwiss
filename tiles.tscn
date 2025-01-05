@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw7fvtu8my2hb"]
+
+[ext_resource type="Texture2D" uid="uid://drcghbmpfvh8d" path="res://icon.svg" id="1_pbvgh"]
+[ext_resource type="Script" path="res://Tiles.gd" id="2_0x1ww"]
+
+[node name="Tiles" type="Polygon2D"]
+texture = ExtResource("1_pbvgh")
+script = ExtResource("2_0x1ww")
