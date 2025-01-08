@@ -77,6 +77,7 @@ func lock_piece():
 	current_piece.set_piece($PieceQueue.get_next_piece())
 	print(current_piece.piece_name)
 	clear_lines()
+	check_game_over()
 
 func max_move(direction: Vector2i):
 	while(true):
@@ -159,6 +160,13 @@ func clear_lines():
 			set_cell(layers.existing_tiles, Vector2i(j, board_height - 1 - i), 0, Vector2i(0, 0), board[i][j])
 			
 	$Score.clear_lines(count_lines_cleared)
+
+func get_score():
+	return $Score.score()
+
+func check_game_over():
+	if not check_piece(current_piece):
+		Events.game_over.emit()
 
 func draw_HUD_piece():
 	clear_layer(layers.HUD)
