@@ -8,6 +8,18 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_4kcuh")
 
+[node name="Background" type="ColorRect" parent="."]
+show_behind_parent = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1184.0
+offset_top = -25.0
+offset_right = 117.0
+offset_bottom = 847.0
+grow_horizontal = 0
+color = Color(0.258824, 0.0627451, 0.792157, 1)
+
 [node name="Menu" type="Node2D" parent="."]
 script = ExtResource("2_76ycs")
 

@@ -1,0 +1,8 @@
+Here's how I want to handle items:
+	
+every item is a scene containing:
+	- icon
+	- cost
+	- a function that manupulates the "Level" node
+
+Special stuff is handled in the level node

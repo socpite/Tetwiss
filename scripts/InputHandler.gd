@@ -10,6 +10,7 @@ var last_input = -1
 
 var in_arr_left = false
 var in_arr_right = false
+var paused = false
 
 signal move(direction: Vector2i)
 signal max_move(direction: Vector2i)
@@ -38,6 +39,11 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if paused:
+		return
+	
+	print("sus")
+	
 	left_right_handler()
 	soft_drop_handler()
 	
@@ -56,6 +62,7 @@ func _process(delta):
 
 func left_right_handler():
 	if Input.is_action_just_pressed("left"):
+		print("RUN")
 		move.emit(Vector2i.LEFT)
 		last_input = LEFT
 		$DASLeftTimer.start()

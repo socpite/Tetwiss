@@ -1,5 +1,7 @@
 extends TileMap
 
+
+
 var piece_scene = preload("res://scene/piece.tscn")
 var current_piece = piece_scene.instantiate()
 var holding_piece = piece_scene.instantiate()
@@ -10,25 +12,55 @@ const QUEUE_POSITION = Vector2i(12, 0)
 var board_length = 10
 var board_height = 22
 var queue_sight = 5
+var paused = false
 
-enum layers {background, existing_tiles, ghost_piece, current_piece, HUD}
+enum layers { background, existing_tiles, ghost_piece, current_piece, HUD }
+
+
 # Called when the node enters the scene tree for the first time.
+func _process(delta):
+	check_pause()
+	if paused:
+		return
+
+	draw_current_piece()
+	draw_ghost_piece()
+	draw_HUD_piece()
+
+
 func _ready():
+	$PauseBlur.hide()
 	current_piece.set_piece($PieceQueue.get_next_piece())
 	$PieceDropTimer.start()
-	pass # Replace with function body.
-	
+
+
+func check_pause():
+	if Input.is_action_just_pressed("pause"):
+		if paused:
+			paused = false
+			$PauseBlur.hide()
+			$InputHandler.paused = false
+			get_tree().call_group("gameplay_timers", "set_paused", 0)
+		else:
+			paused = true
+			$InputHandler.paused = true
+			$PauseBlur.show()
+			get_tree().call_group("gameplay_timers", "set_paused", 1)
+
+
 # check if tile is valid
 func check_valid_tile(position: Vector2i) -> bool:
-	return 0 <= position.x and position.x < board_length and 0 <= position.y and position.y < board_height and get_cell_source_id(1, position) == -1	
+	return 0 <= position.x and position.x < board_length and 0 <= position.y and position.y < board_height and get_cell_source_id(1, position) == -1
+
 
 func check_piece(piece) -> bool:
 	var data = piece.get_tiles()
 	for tile in data:
 		if !check_valid_tile(tile[0]):
 			return false
-	
+
 	return true
+
 
 func move(direction: Vector2i):
 	print(direction)
@@ -36,7 +68,8 @@ func move(direction: Vector2i):
 	new_piece.move(direction)
 	if check_piece(new_piece):
 		current_piece.move(direction)
-		
+
+
 func rotate_clockwise():
 	var kick_list = current_piece.clockwise_kicktable[current_piece.current_rotation]
 	for kick in kick_list:
@@ -46,7 +79,8 @@ func rotate_clockwise():
 		if check_piece(new_piece):
 			current_piece = new_piece
 			break
-		
+
+
 func rotate_counterclockwise():
 	var kick_list = current_piece.counterclockwise_kicktable[current_piece.current_rotation]
 	print(kick_list)
@@ -59,6 +93,7 @@ func rotate_counterclockwise():
 			current_piece = new_piece
 			break
 
+
 func rotate_180():
 	var kick_list = current_piece._180_kicktable[current_piece.current_rotation]
 	for kick in kick_list:
@@ -70,17 +105,19 @@ func rotate_180():
 			current_piece = new_piece
 			break
 
+
 func lock_piece():
 	var piece_tiles = current_piece.get_tiles()
 	for cell in piece_tiles:
-		set_cell(1, cell[0], 0, Vector2i(0, 0), cell[1])	
+		set_cell(1, cell[0], 0, Vector2i(0, 0), cell[1])
 	current_piece.set_piece($PieceQueue.get_next_piece())
 	print(current_piece.piece_name)
 	clear_lines()
 	check_game_over()
 
+
 func max_move(direction: Vector2i):
-	while(true):
+	while true:
 		var new_piece = current_piece.duplicate()
 		new_piece.move(direction)
 		if check_piece(new_piece):
@@ -88,14 +125,17 @@ func max_move(direction: Vector2i):
 		else:
 			break
 
+
 func hard_drop():
 	max_move(Vector2i.DOWN)
 	lock_piece()
+
 
 func draw_piece_on_layer(piece, layer):
 	var piece_tiles = piece.get_tiles()
 	for cell in piece_tiles:
 		set_cell(layer, cell[0], 0, Vector2i(0, 0), cell[1])
+
 
 func hold_piece():
 	if holding_piece.piece_id != 0:
@@ -109,6 +149,7 @@ func hold_piece():
 		holding_piece.reset_to_default()
 		current_piece.set_piece($PieceQueue.get_next_piece())
 
+
 func draw_ghost_piece():
 	clear_layer(layers.ghost_piece)
 	var old_piece = current_piece.duplicate()
@@ -116,13 +157,16 @@ func draw_ghost_piece():
 	draw_piece_on_layer(current_piece, layers.ghost_piece)
 	current_piece = old_piece
 
+
 func draw_current_piece():
 	clear_layer(layers.current_piece)
 	draw_piece_on_layer(current_piece, layers.current_piece)
 
+
 func draw_holding_piece():
 	holding_piece.position = HOLDING_PIECE_POSITION
 	draw_piece_on_layer(holding_piece, layers.HUD)
+
 
 func draw_piece_queue():
 	var current_position = QUEUE_POSITION
@@ -134,6 +178,7 @@ func draw_piece_queue():
 		draw_piece_on_layer(piece, layers.HUD)
 		current_position += Vector2i(0, piece.grid_size)
 	pass
+
 
 func clear_lines():
 	var count_lines_cleared = 0
@@ -150,34 +195,32 @@ func clear_lines():
 			board.append(row)
 		else:
 			count_lines_cleared += 1
-	
+
 	clear_layer(layers.existing_tiles)
-	
+
 	board.reverse()
-	
+
 	for i in board.size():
 		for j in board_length:
 			set_cell(layers.existing_tiles, Vector2i(j, board_height - 1 - i), 0, Vector2i(0, 0), board[i][j])
-			
-	$Score.clear_lines(count_lines_cleared)
+
+	$Level.clear_lines(count_lines_cleared)
+
 
 func get_score():
 	return $Score.score()
 
+
 func check_game_over():
 	if not check_piece(current_piece):
 		Events.game_over.emit()
+
 
 func draw_HUD_piece():
 	clear_layer(layers.HUD)
 	draw_holding_piece()
 	draw_piece_queue()
 
-func _process(delta):
-	draw_current_piece()
-	draw_ghost_piece()
-	draw_HUD_piece()
 
 func _on_piece_drop_timer_timeout():
 	move(Vector2i.DOWN)
-	
