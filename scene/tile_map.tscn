@@ -5,9 +5,9 @@
 [ext_resource type="Script" path="res://scripts/tile_map.gd" id="3_867pe"]
 [ext_resource type="Script" path="res://scripts/PieceQueue.gd" id="4_27gu6"]
 [ext_resource type="Script" path="res://scripts/InputHandler.gd" id="5_8fh7r"]
-[ext_resource type="Script" path="res://scene/Level.gd" id="6_ss4xy"]
+[ext_resource type="Script" path="res://scripts/Level.gd" id="6_ss4xy"]
 [ext_resource type="Texture2D" uid="uid://dl6ohc02vpxf6" path="res://assets/charge_bar.png" id="7_misee"]
-[ext_resource type="Script" path="res://scene/ChargeBar.gd" id="8_1t3ty"]
+[ext_resource type="Script" path="res://scripts/ChargeBar.gd" id="8_k88vh"]
 [ext_resource type="Shader" path="res://scene/blur.gdshader" id="9_3fu1i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2c3e3"]
@@ -46,7 +46,7 @@ shader_parameter/blur_amount = 3.506
 shader_parameter/mix_amount = 0.495
 shader_parameter/color_over = Color(1, 1, 1, 0)
 
-[node name="TileMap" type="TileMap"]
+[node name="TileMap" type="TileMap" groups=["game"]]
 position = Vector2(489, 127)
 scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_sxls5")
@@ -130,7 +130,7 @@ texture = ExtResource("7_misee")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 1891.88, 62)
-script = ExtResource("8_1t3ty")
+script = ExtResource("8_k88vh")
 
 [node name="PauseBlur" type="ColorRect" parent="."]
 visible = false

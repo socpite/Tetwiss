@@ -1,6 +1,7 @@
 extends Node
 
 signal game_over
+signal buy(item_name: String)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
