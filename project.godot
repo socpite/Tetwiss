@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PieceData="*res://scripts/piece_data.gd"
-Events="*res://scripts/Events.gd"
+PieceData="*res://scripts/Autoloads/piece_data.gd"
+Events="*res://scripts/Autoloads/Events.gd"
 
 [display]
 

@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://d4moacxp2ga7h"]
+[gd_scene load_steps=5 format=3 uid="uid://d4moacxp2ga7h"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_4kcuh"]
 [ext_resource type="Script" path="res://scripts/menu.gd" id="2_76ycs"]
 [ext_resource type="Texture2D" uid="uid://c6tebwrw7nxlw" path="res://assets/game_title.png" id="3_u0klc"]
 [ext_resource type="Texture2D" uid="uid://dhi7b75awdtdi" path="res://assets/play_button.png" id="4_a7ntn"]
-[ext_resource type="Texture2D" uid="uid://csw5bu5kj2r7f" path="res://assets/shop_title.png" id="5_fao4y"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_4kcuh")
@@ -46,13 +45,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 icon = ExtResource("4_a7ntn")
 flat = true
-
-[node name="Shop" type="Node2D" parent="."]
-
-[node name="ShopTitle" type="Sprite2D" parent="Shop"]
-position = Vector2(577, 178)
-scale = Vector2(0.679191, 0.657113)
-texture = ExtResource("5_fao4y")
 
 [connection signal="pressed" from="Menu/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Menu/PlayButton" to="Menu" method="_on_button_pressed"]

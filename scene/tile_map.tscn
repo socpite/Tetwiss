@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/tile_map.gd" id="3_867pe"]
 [ext_resource type="Script" path="res://scripts/PieceQueue.gd" id="4_27gu6"]
 [ext_resource type="Script" path="res://scripts/InputHandler.gd" id="5_8fh7r"]
-[ext_resource type="Script" path="res://scripts/Level.gd" id="6_ss4xy"]
+[ext_resource type="Script" path="res://scripts/Level.gd" id="6_34who"]
 [ext_resource type="Texture2D" uid="uid://dl6ohc02vpxf6" path="res://assets/charge_bar.png" id="7_misee"]
 [ext_resource type="Script" path="res://scripts/ChargeBar.gd" id="8_k88vh"]
 [ext_resource type="Shader" path="res://scene/blur.gdshader" id="9_3fu1i"]
@@ -84,7 +84,7 @@ script = ExtResource("5_8fh7r")
 [node name="SDRTimer" type="Timer" parent="InputHandler" groups=["gameplay_timers"]]
 
 [node name="Level" type="Node" parent="."]
-script = ExtResource("6_ss4xy")
+script = ExtResource("6_34who")
 
 [node name="ScoreLabel" type="Label" parent="Level"]
 offset_left = 515.0
