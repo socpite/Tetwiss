@@ -34,6 +34,10 @@ func clear_lines(count: int):
 
 
 func set_level(level):
+	
+	if level % 5 == 0:
+		Events.open_shop.emit()
+	
 	current_level = level
 	$LevelLabel.text = "Level " + str(current_level)
 
