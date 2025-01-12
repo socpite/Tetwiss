@@ -1,6 +1,7 @@
 extends Node2D
 
 var cost: int
+var item_instance
 
 @export var icon_size = 100.0
 
@@ -12,6 +13,7 @@ func set_item(item_name: String):
 	cost = item_data["cost"]
 	
 	print(item_data["script_path"])
+	item_instance = load(item_data["script_path"]).new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
