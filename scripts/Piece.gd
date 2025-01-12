@@ -17,25 +17,25 @@ func _ready():
 
 func set_piece(_piece_name: String):
 	piece_name = _piece_name
-	piece_id = PieceData.piece_data[piece_name]["piece_id"]
+	piece_id = Data.piece_data[piece_name]["piece_id"]
 	
 	position = Vector2i(4, 0)
 	
-	grid = PieceData.piece_data[piece_name]["grid"]
-	grid_size = PieceData.piece_data[piece_name]["grid_size"]
+	grid = Data.piece_data[piece_name]["grid"]
+	grid_size = Data.piece_data[piece_name]["grid_size"]
 	
 	current_rotation = 0
 	
-	clockwise_kicktable = PieceData.piece_data[piece_name]["clockwise_kicktable"]
-	counterclockwise_kicktable = PieceData.piece_data[piece_name]["counterclockwise_kicktable"]
-	_180_kicktable = PieceData.piece_data[piece_name]["180_kicktable"]
+	clockwise_kicktable = Data.piece_data[piece_name]["clockwise_kicktable"]
+	counterclockwise_kicktable = Data.piece_data[piece_name]["counterclockwise_kicktable"]
+	_180_kicktable = Data.piece_data[piece_name]["180_kicktable"]
 	
 func set_random_piece():
-	set_piece(PieceData.piece_data.keys().pick_random())
+	set_piece(Data.piece_data.keys().pick_random())
 
 func reset_to_default():
 	current_rotation = 0
-	grid = PieceData.piece_data[piece_name]["grid"]
+	grid = Data.piece_data[piece_name]["grid"]
 	position = spawn_position
 
 func rotate_counterclockwise():

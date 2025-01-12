@@ -16,7 +16,7 @@ func get_next_piece() -> String:
 
 func gen_queue():
 	queue.clear()
-	var temp = PieceData.piece_data.keys()
+	var temp = Data.piece_data.keys()
 	temp.shuffle()
 	queue.append_array(temp)
 	temp.shuffle()
