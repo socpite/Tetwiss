@@ -27,3 +27,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func _on_done_button_pressed():
+	Events.close_shop.emit() # Replace with function body.
