@@ -3,7 +3,7 @@ extends Node2D
 var cost: int
 var item_instance
 
-@export var icon_size = 200.0
+@export var icon_size = 100.0
 
 func set_item(item_name: String):
 	var item_data = Data.item_data[item_name]
