@@ -1,25 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://cl1agwnbsteo5"]
+[gd_scene load_steps=6 format=3 uid="uid://cl1agwnbsteo5"]
 
 [ext_resource type="Script" path="res://scripts/shop.gd" id="1_aqu4h"]
 [ext_resource type="Texture2D" uid="uid://csw5bu5kj2r7f" path="res://assets/shop_title.png" id="1_g0f3j"]
 [ext_resource type="PackedScene" uid="uid://cfsl7460h4s6p" path="res://scene/item.tscn" id="3_k4whs"]
 [ext_resource type="Texture2D" uid="uid://cv8qa6ndhq82a" path="res://assets/shop_outline.png" id="4_hr3f6"]
+[ext_resource type="Texture2D" uid="uid://ctoxb6jt8fakt" path="res://assets/shop_done.png" id="5_qbx72"]
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_aqu4h")
 
 [node name="ShopOutline" type="Sprite2D" parent="."]
-position = Vector2(586, 479)
+position = Vector2(586, 373)
 scale = Vector2(1.16613, 1.04365)
 texture = ExtResource("4_hr3f6")
 
 [node name="ShopTitle" type="Sprite2D" parent="."]
-position = Vector2(577, 178)
-scale = Vector2(0.679191, 0.657113)
+position = Vector2(548, 108)
+scale = Vector2(0.524704, 0.504777)
 texture = ExtResource("1_g0f3j")
 
 [node name="FirstDummyItem" parent="." instance=ExtResource("3_k4whs")]
-position = Vector2(212, 448)
+position = Vector2(214, 359)
 
 [node name="LastDummyItem" parent="." instance=ExtResource("3_k4whs")]
-position = Vector2(940, 464)
+position = Vector2(934, 371)
+
+[node name="DoneButton" type="Button" parent="."]
+offset_left = 454.0
+offset_top = 541.0
+offset_right = 695.0
+offset_bottom = 640.0
+icon = ExtResource("5_qbx72")
+flat = true
+
+[connection signal="pressed" from="DoneButton" to="." method="_on_done_button_pressed"]
