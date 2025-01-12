@@ -42,9 +42,9 @@ sources/1 = SubResource("TileSetAtlasSource_3pvtj")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_78q27"]
 shader = ExtResource("9_3fu1i")
-shader_parameter/blur_amount = 1.618
+shader_parameter/blur_amount = 3.506
 shader_parameter/mix_amount = 0.495
-shader_parameter/color_over = Color(1, 1, 1, 1)
+shader_parameter/color_over = Color(1, 1, 1, 0)
 
 [node name="TileMap" type="TileMap"]
 position = Vector2(489, 127)
@@ -122,6 +122,7 @@ text = "10x combo"
 horizontal_alignment = 2
 
 [node name="ChargeBar" type="Sprite2D" parent="Level"]
+show_behind_parent = true
 position = Vector2(658, 477)
 rotation = -1.5708
 scale = Vector2(0.185128, 0.169164)
@@ -132,11 +133,12 @@ region_rect = Rect2(0, 0, 1891.88, 62)
 script = ExtResource("8_1t3ty")
 
 [node name="PauseBlur" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_78q27")
-offset_left = -186.0
-offset_top = -26.0
-offset_right = 268.0
-offset_bottom = 202.0
+offset_left = -253.0
+offset_top = -65.0
+offset_right = 330.0
+offset_bottom = 274.0
 
 [connection signal="timeout" from="PieceDropTimer" to="." method="_on_piece_drop_timer_timeout"]
 [connection signal="hard_drop" from="InputHandler" to="." method="hard_drop"]

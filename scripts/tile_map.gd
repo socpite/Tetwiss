@@ -1,7 +1,5 @@
 extends TileMap
 
-
-
 var piece_scene = preload("res://scene/piece.tscn")
 var current_piece = piece_scene.instantiate()
 var holding_piece = piece_scene.instantiate()
@@ -37,15 +35,23 @@ func _ready():
 func check_pause():
 	if Input.is_action_just_pressed("pause"):
 		if paused:
-			paused = false
-			$PauseBlur.hide()
-			$InputHandler.paused = false
-			get_tree().call_group("gameplay_timers", "set_paused", 0)
+			unpause()
 		else:
-			paused = true
-			$InputHandler.paused = true
-			$PauseBlur.show()
-			get_tree().call_group("gameplay_timers", "set_paused", 1)
+			pause()
+
+
+func pause():
+	paused = true
+	$InputHandler.paused = true
+	$PauseBlur.show()
+	get_tree().call_group("gameplay_timers", "set_paused", 1)
+
+
+func unpause():
+	paused = false
+	$PauseBlur.hide()
+	$InputHandler.paused = false
+	get_tree().call_group("gameplay_timers", "set_paused", 0)
 
 
 # check if tile is valid
