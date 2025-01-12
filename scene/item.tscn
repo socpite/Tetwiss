@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfsl7460h4s6p"]
+[gd_scene load_steps=3 format=3 uid="uid://cfsl7460h4s6p"]
 
 [ext_resource type="Script" path="res://Item.gd" id="1_w13cg"]
+[ext_resource type="Script" path="res://scripts/ItemIcon.gd" id="3_cx2x1"]
 
 [node name="Item" type="Node2D"]
+position = Vector2(153, 137)
 script = ExtResource("1_w13cg")
 
 [node name="ItemIcon" type="Sprite2D" parent="."]
+position = Vector2(415.445, 175)
+script = ExtResource("3_cx2x1")
+size = 100.0
