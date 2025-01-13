@@ -132,6 +132,12 @@ region_enabled = true
 region_rect = Rect2(0, 0, 1891.88, 62)
 script = ExtResource("8_k88vh")
 
+[node name="MultiplierLabel" type="Label" parent="Level"]
+offset_left = 532.0
+offset_top = 485.0
+offset_right = 617.0
+offset_bottom = 518.0
+
 [node name="PauseBlur" type="ColorRect" parent="."]
 visible = false
 z_index = 3
