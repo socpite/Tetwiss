@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://cfsl7460h4s6p"]
 
 [ext_resource type="Script" path="res://scripts/Item.gd" id="1_pr8gu"]
-[ext_resource type="Texture2D" uid="uid://7vg14di3ld8p" path="res://assets/item_icons/first_cat_meme.png" id="2_nqa1p"]
+[ext_resource type="Texture2D" uid="uid://7vg14di3ld8p" path="res://assets/items/The first cat meme/icon.png" id="2_5fgjv"]
 [ext_resource type="Script" path="res://scripts/ItemIcon.gd" id="3_cx2x1"]
 
 [node name="Item" type="Node2D"]
 script = ExtResource("1_pr8gu")
 
 [node name="ItemIcon" type="Sprite2D" parent="."]
-texture = ExtResource("2_nqa1p")
+texture = ExtResource("2_5fgjv")
 script = ExtResource("3_cx2x1")

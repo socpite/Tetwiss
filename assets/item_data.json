@@ -2,8 +2,8 @@
 	"The first cat meme":
 		{
 			"id": 1,
-			"icon_path": "res://assets/item_icons/first_cat_meme.png",
-			"script_path": "res://scripts/items/first_cat_meme.gd",
+			"icon_path": "res://assets/items/The first cat meme/icon.png",
+			"script_path": "res://assets/items/The first cat meme/script.gd",
 			"cost": 5
 		}
 }

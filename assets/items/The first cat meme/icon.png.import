@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://7vg14di3ld8p"
-path="res://.godot/imported/first_cat_meme.png-6def3eaba4375a6ba9687a7dca21b406.ctex"
+path="res://.godot/imported/icon.png-940264c35a07734cc33f837d0bf03f47.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/item_icons/first_cat_meme.png"
-dest_files=["res://.godot/imported/first_cat_meme.png-6def3eaba4375a6ba9687a7dca21b406.ctex"]
+source_file="res://assets/items/The first cat meme/icon.png"
+dest_files=["res://.godot/imported/icon.png-940264c35a07734cc33f837d0bf03f47.ctex"]
 
 [params]
 
