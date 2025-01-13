@@ -11,6 +11,7 @@ var board_length = 10
 var board_height = 22
 var queue_sight = 5
 var paused = false
+var inventory = []
 
 enum layers { background, existing_tiles, ghost_piece, current_piece, HUD }
 
@@ -30,7 +31,7 @@ func _ready():
 	$PauseBlur.hide()
 	current_piece.set_piece($PieceQueue.get_next_piece())
 	$PieceDropTimer.start()
-
+	Events.open_shop.emit()
 
 func check_pause():
 	if Input.is_action_just_pressed("pause"):
@@ -69,7 +70,6 @@ func check_piece(piece) -> bool:
 
 
 func move(direction: Vector2i):
-	print(direction)
 	var new_piece = current_piece.duplicate()
 	new_piece.move(direction)
 	if check_piece(new_piece):
@@ -89,8 +89,6 @@ func rotate_clockwise():
 
 func rotate_counterclockwise():
 	var kick_list = current_piece.counterclockwise_kicktable[current_piece.current_rotation]
-	print(kick_list)
-	print(current_piece.current_rotation)
 	for kick in kick_list:
 		var new_piece = current_piece.duplicate()
 		new_piece.move(Vector2i(kick[0], -kick[1]))
@@ -117,7 +115,6 @@ func lock_piece():
 	for cell in piece_tiles:
 		set_cell(1, cell[0], 0, Vector2i(0, 0), cell[1])
 	current_piece.set_piece($PieceQueue.get_next_piece())
-	print(current_piece.piece_name)
 	clear_lines()
 	check_game_over()
 

@@ -88,7 +88,6 @@ func _on_das_left_timer_timeout():
 		$ARRLeftTimer.start()
 
 func _on_das_right_timer_timeout():
-	print("ARR_RIGHT")
 	in_arr_right = true
 	if ARR != 0:
 		$ARRRightTimer.start()

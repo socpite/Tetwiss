@@ -1,7 +1,8 @@
 extends Node
 
 signal game_over
-signal buy(item_name: String)
+
+signal buy(item)
 signal open_shop
 signal close_shop
 # Called when the node enters the scene tree for the first time.

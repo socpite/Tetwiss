@@ -7,9 +7,6 @@ func scale_to_square(size):
 	scale.x = size/x
 	scale.y = size/y
 	
-	print(x)
-	print(y)
-	
 func _ready():
 	pass # Replace with function body.
 
