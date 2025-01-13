@@ -14,6 +14,8 @@ func set_item(item_name: String):
 	
 	print(item_data["script_path"])
 	item_instance = load(item_data["script_path"]).new()
+	
+	$CostLabel.text = str(cost) + "$"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
