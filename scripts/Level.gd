@@ -9,15 +9,11 @@ var charge: float
 
 
 func _ready():
-	process_multiplier()
 	$ComboLabel.hide()
-	set_level(1)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if score > target_score:
-		set_level(current_level + 1)
+	pass
 
 
 func display_combo():
@@ -27,40 +23,11 @@ func display_combo():
 	else:
 		$ComboLabel.hide()
 
-
-func process_combo(lines_cleared):
-	if lines_cleared > 0:
-		combo += 1
-	else:
-		combo = 0
+func display(game):
+	$ScoreLabel.text = str(game.score)
+	$LevelLabel.text = "Level " + str(game.current_level)
+	$TargetScoreLabel.text = "Score to beat:\n " + str(game.target_score)
 	display_combo()
-
-
-func process_multiplier():
-	multiplier = combo + 1
-	for item in $Inventory.items:
-		item.item_instance.modify(self)
-
-	$MultiplierLabel.set_text(str(multiplier) + " Mult")
-
-
-func clear_lines(count: int):
-	score += multiplier * count * count * 100 + 100
-
-	process_combo(count)
-	process_multiplier()
-
-	$ChargeBar.target_charge += 0.1 * count
-	$ScoreLabel.text = str(score)
-
-
-func set_level(level):
-	if level % 5 == 0:
-		score = target_score
-		Events.open_shop.emit()
-
-	current_level = level
-	$LevelLabel.text = "Level " + str(current_level)
-
-	target_score = level * (level + 1) * 1000
-	$TargetScoreLabel.text = "Score to beat:\n " + str(target_score)
+	$ChargeBar.target_charge = str(game.charge)
+	$MultiplierLabel.text = str(game.multiplier)
+	

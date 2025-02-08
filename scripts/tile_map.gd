@@ -1,5 +1,7 @@
 extends TileMap
 
+signal clear_lines_signal(line_count: int)
+
 var piece_scene = preload("res://scene/piece.tscn")
 var current_piece = piece_scene.instantiate()
 var holding_piece = piece_scene.instantiate()
@@ -14,6 +16,7 @@ var paused = false
 var inventory = []
 
 enum layers { background, existing_tiles, ghost_piece, current_piece, HUD }
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -207,7 +210,7 @@ func clear_lines():
 		for j in board_length:
 			set_cell(layers.existing_tiles, Vector2i(j, board_height - 1 - i), 0, Vector2i(0, 0), board[i][j])
 
-	$Level.clear_lines(count_lines_cleared)
+	clear_lines_signal.emit(count_lines_cleared)
 
 
 func get_score():
