@@ -11,7 +11,7 @@ func set_item(_item_name: String):
 	item_name = _item_name
 	var item_data = Data.item_data[item_name]
 	$ItemIcon.set_texture(load(item_data["icon_path"]))
-	$ItemIcon.scale_to_square(icon_size)
+	Helper.scale_to_square($ItemIcon, icon_size)
 	
 	cost = item_data["cost"]
 	

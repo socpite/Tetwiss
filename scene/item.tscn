@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfsl7460h4s6p"]
+[gd_scene load_steps=4 format=3 uid="uid://cfsl7460h4s6p"]
 
 [ext_resource type="Script" path="res://scripts/Item.gd" id="1_pr8gu"]
 [ext_resource type="Texture2D" uid="uid://7vg14di3ld8p" path="res://assets/items/The first cat meme/icon.png" id="2_5fgjv"]
-[ext_resource type="Script" path="res://scripts/ItemIcon.gd" id="3_cx2x1"]
 [ext_resource type="Texture2D" uid="uid://eebfigkm0ll6" path="res://assets/cost_board.png" id="4_hnmq6"]
 
 [node name="Item" type="Node2D"]
@@ -16,7 +15,6 @@ offset_bottom = 50.0
 
 [node name="ItemIcon" type="Sprite2D" parent="."]
 texture = ExtResource("2_5fgjv")
-script = ExtResource("3_cx2x1")
 
 [node name="CostBoard" type="Sprite2D" parent="."]
 position = Vector2(6.77626e-21, 72)
