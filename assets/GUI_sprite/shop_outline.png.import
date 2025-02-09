@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c20o26lwm4ejl"
-path="res://.godot/imported/smoke_extra_small.png-d94d9df9be4978aeadcbc758f47626e6.ctex"
+uid="uid://cv8qa6ndhq82a"
+path="res://.godot/imported/shop_outline.png-62b92ffdaeee5c8b46ff9b3b092a2767.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/smoke_extra_small.png"
-dest_files=["res://.godot/imported/smoke_extra_small.png-d94d9df9be4978aeadcbc758f47626e6.ctex"]
+source_file="res://assets/GUI_sprite/shop_outline.png"
+dest_files=["res://.godot/imported/shop_outline.png-62b92ffdaeee5c8b46ff9b3b092a2767.ctex"]
 
 [params]
 

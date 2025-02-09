@@ -5,5 +5,12 @@
 			"icon_path": "res://assets/items/The first cat meme/icon.png",
 			"script_path": "res://assets/items/The first cat meme/script.gd",
 			"cost": 5
+		},
+	"Cat with hat":
+		{
+			"id": 2,
+			"icon_path": "res://assets/items/Cat with hat/icon.jpg",
+			"script_path": "res://assets/items/Cat with hat/script.gd",
+			"cost": 5
 		}
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://capn7wain57ar"
-path="res://.godot/imported/square_set.png-a7af54fdf4d287eaf5ae041b148e016d.ctex"
+uid="uid://wyve4t5bny04"
+path="res://.godot/imported/square_background.png-b56f29e4f2c891059f733856b5cfc8f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/square_set.png"
-dest_files=["res://.godot/imported/square_set.png-a7af54fdf4d287eaf5ae041b148e016d.ctex"]
+source_file="res://assets/GUI_sprite/square_background.png"
+dest_files=["res://.godot/imported/square_background.png-b56f29e4f2c891059f733856b5cfc8f1.ctex"]
 
 [params]
 

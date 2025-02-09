@@ -29,5 +29,5 @@ func display(game):
 	$TargetScoreLabel.text = "Score to beat:\n " + str(game.target_score)
 	display_combo()
 	$ChargeBar.target_charge = str(game.charge)
-	$MultiplierLabel.text = str(game.multiplier)
+	$MultiplierLabel.text = str(game.multiplier) + "x Mult"
 	

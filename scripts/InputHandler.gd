@@ -119,6 +119,3 @@ func soft_drop_handler():
 func _on_sdr_timer_timeout():
 	move.emit(Vector2i.DOWN)
 	
-
-
-
