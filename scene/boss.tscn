@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4ced4qq8ab8s"]
+
+[ext_resource type="Script" path="res://scripts/boss.gd" id="1_4mssk"]
+[ext_resource type="Texture2D" uid="uid://cbb3av7hdf38m" path="res://assets/GUI_sprite/boss_background.jpg" id="2_f8mvv"]
+[ext_resource type="Texture2D" uid="uid://dx3fpgmcuptxi" path="res://assets/bosses/The Fluff/icon.jpg" id="2_hcq0k"]
+
+[node name="Boss" type="Node2D"]
+script = ExtResource("1_4mssk")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(212, 103)
+scale = Vector2(0.6075, 0.4)
+texture = ExtResource("2_f8mvv")
+
+[node name="BossIcon" type="Sprite2D" parent="."]
+position = Vector2(100, 100)
+scale = Vector2(0.562, 0.562)
+texture = ExtResource("2_hcq0k")
+
+[node name="DescriptionLabel" type="Label" parent="."]
+offset_left = 206.0
+offset_right = 460.0
+offset_bottom = 168.0
+theme_override_font_sizes/font_size = 28
+text = "Cover half of the board"
+autowrap_mode = 3
