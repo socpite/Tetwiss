@@ -1,0 +1,9 @@
+{
+	"The Fluff":
+		{
+			"id": 1,
+			"icon_path": "res://assets/bosses/The Fluff/icon.jpg",
+			"script_path": "res://assets/bosses/The Fluff/script.gd",
+			"boss_description": "Cover half of the board"
+		} 
+}

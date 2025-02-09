@@ -12,7 +12,7 @@ func boss_start(game):
 	
 	for i in cover_height:
 		for j in cover_width:
-			tilemap.set_cell(tilemap.layers.HUD, Vector2i(j, i), 0, Vector2i(0, 0), 8)
+			tilemap.set_cell(tilemap.layers.HUD, Vector2i(j, i + cover_height), 0, Vector2i(0, 0), 8)
 	
 	tilemap.clear_layer(tilemap.layers.ghost_piece)
 	tilemap.ghost_piece_enabled = false
@@ -27,7 +27,7 @@ func boss_end(game):
 	
 	for i in cover_height:
 		for j in cover_width:
-			tilemap.set_cell(tilemap.layers.HUD, Vector2i(j, i))
+			tilemap.set_cell(tilemap.layers.HUD, Vector2i(j, i + cover_height))
 	
 	tilemap.clear_layer(tilemap.layers.ghost_piece)
 	tilemap.ghost_piece_enabled = true

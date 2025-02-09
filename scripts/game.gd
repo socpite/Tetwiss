@@ -18,6 +18,10 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	if Input.is_action_just_pressed("hack"):
+		score += 1000
+	
 	if score >= target_score:
 		set_level(current_level + 1)
 	display()
@@ -76,4 +80,3 @@ func set_level(level):
 
 func display():
 	$Level.display(self)
-	

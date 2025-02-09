@@ -1,7 +1,7 @@
 extends Node
 # Called when the node enters the scene tree for the first time.
 
-var game_scene = preload("res://scene/tile_map.tscn")
+var game_scene = preload("res://scene/game.tscn")
 var shop_scene = preload("res://scene/shop.tscn")
 
 func _ready():
@@ -17,7 +17,7 @@ func _process(delta):
 
 func _on_game_over():
 	$Menu.show()
-	get_node("TileMap").queue_free()
+	get_node("Game").queue_free()
 
 
 func _on_play_button_pressed():
@@ -26,9 +26,9 @@ func _on_play_button_pressed():
 
 
 func open_shop():
-	get_node("TileMap").pause()
+	get_node("Game").pause()
 	add_child(shop_scene.instantiate())
 	
 func close_shop():
-	get_node("TileMap").unpause()
+	get_node("Game").unpause()
 	get_node("Shop").queue_free()

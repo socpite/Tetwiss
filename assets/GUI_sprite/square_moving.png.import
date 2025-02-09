@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctoxb6jt8fakt"
-path="res://.godot/imported/shop_done.png-5b3ca99f48bb95b0e80c1220822a68b6.ctex"
+uid="uid://d06j4wddk05w1"
+path="res://.godot/imported/square_moving.png-a04026fab5aa7f77c04ab570f519c67e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/shop_done.png"
-dest_files=["res://.godot/imported/shop_done.png-5b3ca99f48bb95b0e80c1220822a68b6.ctex"]
+source_file="res://assets/GUI_sprite/square_moving.png"
+dest_files=["res://.godot/imported/square_moving.png-a04026fab5aa7f77c04ab570f519c67e.ctex"]
 
 [params]
 
@@ -25,7 +25,7 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=true
+process/fix_alpha_border=false
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false

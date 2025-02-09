@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cl1agwnbsteo5"]
 
 [ext_resource type="Script" path="res://scripts/shop.gd" id="1_aqu4h"]
-[ext_resource type="Texture2D" uid="uid://csw5bu5kj2r7f" path="res://assets/shop_title.png" id="1_g0f3j"]
+[ext_resource type="Texture2D" uid="uid://csw5bu5kj2r7f" path="res://assets/GUI_sprite/shop_title.png" id="1_g0f3j"]
 [ext_resource type="PackedScene" uid="uid://cfsl7460h4s6p" path="res://scene/item.tscn" id="3_k4whs"]
-[ext_resource type="Texture2D" uid="uid://cv8qa6ndhq82a" path="res://assets/shop_outline.png" id="4_hr3f6"]
-[ext_resource type="Texture2D" uid="uid://ctoxb6jt8fakt" path="res://assets/shop_done.png" id="5_qbx72"]
+[ext_resource type="Texture2D" uid="uid://cv8qa6ndhq82a" path="res://assets/GUI_sprite/shop_outline.png" id="4_hr3f6"]
+[ext_resource type="Texture2D" uid="uid://ctoxb6jt8fakt" path="res://assets/GUI_sprite/shop_done.png" id="5_qbx72"]
 
 [node name="Shop" type="Node2D"]
 z_index = 8

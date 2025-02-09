@@ -14,6 +14,7 @@ var board_height = 22
 var queue_sight = 5
 var paused = false
 var inventory = []
+var ghost_piece_enabled = true
 
 enum layers { background, existing_tiles, ghost_piece, current_piece, HUD }
 
@@ -25,8 +26,9 @@ func _process(delta):
 	if paused:
 		return
 
+	if ghost_piece_enabled:
+		draw_ghost_piece()
 	draw_current_piece()
-	draw_ghost_piece()
 	draw_HUD_piece()
 
 
@@ -221,9 +223,17 @@ func check_game_over():
 	if not check_piece(current_piece):
 		Events.game_over.emit()
 
+func clear_HUD():
+	for i in 4:
+		for j in 4:
+			set_cell(layers.HUD, HOLDING_PIECE_POSITION + Vector2i(i, j))
+	
+	for i in 30:
+		for j in 30:
+			set_cell(layers.HUD, QUEUE_POSITION + Vector2i(i, j))
 
 func draw_HUD_piece():
-	clear_layer(layers.HUD)
+	clear_HUD()
 	draw_holding_piece()
 	draw_piece_queue()
 
