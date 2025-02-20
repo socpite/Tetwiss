@@ -21,6 +21,7 @@ signal hard_drop
 signal hold_piece
 signal rotate_180
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
