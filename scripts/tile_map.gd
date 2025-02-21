@@ -1,6 +1,6 @@
 extends TileMap
 
-signal clear_lines_signal(line_count: int)
+signal clear_lines_signal(line_count: int, is_spin_move: bool, last_piece: String)
 
 var piece_scene = preload("res://scene/piece.tscn")
 var current_piece = piece_scene.instantiate()
@@ -15,10 +15,9 @@ var queue_sight = 5
 var paused = false
 var inventory = []
 var ghost_piece_enabled = true
-var last_move_is_spin = false
+var last_spin_distance = -1
 
 enum layers { background, existing_tiles, ghost_piece, current_piece, HUD }
-
 
 
 # Called when the node enters the scene tree for the first time.
@@ -38,6 +37,7 @@ func _ready():
 	current_piece.set_piece($PieceQueue.get_next_piece())
 	$PieceDropTimer.start()
 	Events.open_shop.emit()
+
 
 func check_pause():
 	if Input.is_action_just_pressed("pause"):
@@ -61,11 +61,10 @@ func unpause():
 	get_tree().call_group("gameplay_timers", "set_paused", 0)
 
 
-# check if tile is valid
 func check_valid_tile(position: Vector2i) -> bool:
 	return 0 <= position.x and position.x < board_length and 0 <= position.y and position.y < board_height and get_cell_source_id(1, position) == -1
 
-
+#Check if whole piece is valid
 func check_piece(piece) -> bool:
 	var data = piece.get_tiles()
 	for tile in data:
@@ -80,7 +79,7 @@ func move(direction: Vector2i):
 	new_piece.move(direction)
 	if check_piece(new_piece):
 		current_piece.move(direction)
-		last_move_is_spin = false
+		last_spin_distance = -1
 
 
 func rotate_clockwise():
@@ -91,7 +90,7 @@ func rotate_clockwise():
 		new_piece.rotate_clockwise()
 		if check_piece(new_piece):
 			current_piece = new_piece
-			last_move_is_spin = true
+			last_spin_distance = abs(kick[0]) + abs(-kick[1]) 
 			break
 
 
@@ -103,7 +102,7 @@ func rotate_counterclockwise():
 		new_piece.rotate_counterclockwise()
 		if check_piece(new_piece):
 			current_piece = new_piece
-			last_move_is_spin = true
+			last_spin_distance = abs(kick[0]) + abs(-kick[1]) 
 			break
 
 
@@ -123,8 +122,8 @@ func lock_piece():
 	var piece_tiles = current_piece.get_tiles()
 	for cell in piece_tiles:
 		set_cell(1, cell[0], 0, Vector2i(0, 0), cell[1])
-	current_piece.set_piece($PieceQueue.get_next_piece())
 	clear_lines()
+	current_piece.set_piece($PieceQueue.get_next_piece())
 	check_game_over()
 
 
@@ -141,7 +140,6 @@ func max_move(direction: Vector2i):
 func hard_drop():
 	max_move(Vector2i.DOWN)
 	lock_piece()
-
 
 func draw_piece_on_layer(piece, layer):
 	var piece_tiles = piece.get_tiles()
@@ -191,7 +189,8 @@ func draw_piece_queue():
 		current_position += Vector2i(0, piece.grid_size)
 	pass
 
-
+# Update board when piece is locked. called in lock_piece, before getting new piece in queue. 
+# Emmit signal about move, spin, and last piece
 func clear_lines():
 	var count_lines_cleared = 0
 	var board = []
@@ -208,6 +207,8 @@ func clear_lines():
 		else:
 			count_lines_cleared += 1
 
+	clear_lines_signal.emit(count_lines_cleared, check_spin(), current_piece.piece_name)
+	
 	clear_layer(layers.existing_tiles)
 
 	board.reverse()
@@ -215,8 +216,7 @@ func clear_lines():
 	for i in board.size():
 		for j in board_length:
 			set_cell(layers.existing_tiles, Vector2i(j, board_height - 1 - i), 0, Vector2i(0, 0), board[i][j])
-
-	clear_lines_signal.emit(count_lines_cleared)
+	
 
 
 func get_score():
@@ -227,20 +227,38 @@ func check_game_over():
 	if not check_piece(current_piece):
 		Events.game_over.emit()
 
+
 func clear_HUD():
 	for i in 4:
 		for j in 4:
 			set_cell(layers.HUD, HOLDING_PIECE_POSITION + Vector2i(i, j))
-	
+
 	for i in 30:
 		for j in 30:
 			set_cell(layers.HUD, QUEUE_POSITION + Vector2i(i, j))
+
 
 func draw_HUD_piece():
 	clear_HUD()
 	draw_holding_piece()
 	draw_piece_queue()
 
-
+# gravity drop
 func _on_piece_drop_timer_timeout():
 	move(Vector2i.DOWN)
+
+
+func check_spin() -> bool:
+	if current_piece.piece_name == "T":
+		if last_spin_distance >= 3:
+			return true
+		var count = 0
+		var corner_positions = [Vector2i(0, 0), Vector2i(0, 2), Vector2i(2, 0), Vector2i(2, 2)]
+		for i in corner_positions:
+			if not check_valid_tile(current_piece.position + i):
+				count += 1
+		print(count)
+		return count >= 3 and last_spin_distance != -1
+	return false
+			
+	

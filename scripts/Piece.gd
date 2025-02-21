@@ -72,4 +72,3 @@ func move(direction):
 func _process(delta):
 	pass
 	
-

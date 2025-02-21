@@ -50,7 +50,7 @@ func process_multiplier():
 
 
 
-func clear_lines(count: int):
+func clear_lines(count: int, is_spin_move: bool, last_piece: String):
 	score += multiplier * count * count * 100 + 100
 
 	process_combo(count)

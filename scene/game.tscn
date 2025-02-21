@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b1gx15v71ge15"]
+[gd_scene load_steps=18 format=3 uid="uid://b1gx15v71ge15"]
 
 [ext_resource type="Texture2D" uid="uid://capn7wain57ar" path="res://assets/GUI_sprite/square_set.png" id="1_ixdtv"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_ntxld"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/ChargeBar.gd" id="8_t42de"]
 [ext_resource type="Script" path="res://scripts/Inventory.gd" id="9_mwxk3"]
 [ext_resource type="Shader" path="res://scene/blur.gdshader" id="10_qnmrm"]
+[ext_resource type="Script" path="res://scene/spin_move_label.gd" id="11_kbu3f"]
 [ext_resource type="PackedScene" uid="uid://b4ced4qq8ab8s" path="res://scene/boss.tscn" id="12_8ll6t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2c3e3"]
@@ -121,28 +122,28 @@ horizontal_alignment = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 276.0
-offset_top = -189.0
-offset_right = 387.0
-offset_bottom = -151.0
+offset_left = 673.0
+offset_top = -281.0
+offset_right = 784.0
+offset_bottom = -243.0
 grow_vertical = 2
 pivot_offset = Vector2(0, -6)
 text = "Level 1"
 
 [node name="TargetScoreLabel" type="Label" parent="Level"]
-offset_left = 277.0
-offset_top = 179.0
-offset_right = 384.0
-offset_bottom = 241.0
+offset_left = 675.0
+offset_top = 72.0
+offset_right = 782.0
+offset_bottom = 134.0
 text = "Score to beat:
 1000"
 
 [node name="ComboLabel" type="Label" parent="Level"]
 show_behind_parent = true
-offset_left = 373.0
-offset_top = 247.0
-offset_right = 475.0
-offset_bottom = 290.0
+offset_left = 380.0
+offset_top = 339.0
+offset_right = 482.0
+offset_bottom = 382.0
 text = "10x combo"
 horizontal_alignment = 2
 
@@ -163,6 +164,19 @@ offset_right = 637.0
 offset_bottom = 518.0
 text = "1 mult"
 
+[node name="SpinMoveLabel" type="Label" parent="Level"]
+offset_left = 395.0
+offset_top = 272.0
+offset_right = 475.0
+offset_bottom = 338.0
+theme_override_font_sizes/font_size = 21
+text = "T-spin
+Triple"
+script = ExtResource("11_kbu3f")
+
+[node name="FadeTimer" type="Timer" parent="Level/SpinMoveLabel"]
+wait_time = 3.0
+
 [node name="Inventory" type="Node2D" parent="."]
 position = Vector2(1, 3)
 script = ExtResource("9_mwxk3")
@@ -180,10 +194,11 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Boss" parent="." instance=ExtResource("12_8ll6t")]
-position = Vector2(254, 292)
+position = Vector2(695, 368)
 scale = Vector2(0.5, 0.5)
 
 [connection signal="clear_lines_signal" from="TileMap" to="." method="clear_lines"]
+[connection signal="clear_lines_signal" from="TileMap" to="Level/SpinMoveLabel" method="_on_tile_map_clear_lines_signal"]
 [connection signal="timeout" from="TileMap/PieceDropTimer" to="TileMap" method="_on_piece_drop_timer_timeout"]
 [connection signal="hard_drop" from="TileMap/InputHandler" to="TileMap" method="hard_drop"]
 [connection signal="hold_piece" from="TileMap/InputHandler" to="TileMap" method="hold_piece"]
@@ -197,3 +212,4 @@ scale = Vector2(0.5, 0.5)
 [connection signal="timeout" from="TileMap/InputHandler/ARRLeftTimer" to="TileMap/InputHandler" method="_on_arr_left_timer_timeout"]
 [connection signal="timeout" from="TileMap/InputHandler/ARRRightTimer" to="TileMap/InputHandler" method="_on_arr_right_timer_timeout"]
 [connection signal="timeout" from="TileMap/InputHandler/SDRTimer" to="TileMap/InputHandler" method="_on_sdr_timer_timeout"]
+[connection signal="timeout" from="Level/SpinMoveLabel/FadeTimer" to="Level/SpinMoveLabel" method="_on_fade_timer_timeout"]

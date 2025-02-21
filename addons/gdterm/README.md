@@ -94,20 +94,20 @@ The settings are in the Gdterm section and are as follows:
 - Layout: This indicates where the terminal should reside within the Godot editor.
 
   - main - The terminal will be in the main window (same place as 2D, 3D, Script, and AssetLib)
-           this option gives the most room for doing tasks like editing configuration files
-           or examining listings.
+		   this option gives the most room for doing tasks like editing configuration files
+		   or examining listings.
 
   - bottom - The terminal will be in the bottom panel area (where Output, Debugger, Audio, etc.)
-             are located.
+			 are located.
 
   - both - There will be 2 terminals (one in the main area, and the other in the bottom panel)
 
 - Theme: This has one of the 3 themes supported, and changes the colors, foreground and background
-         for all the terminal windows.
+		 for all the terminal windows.
 
 - Initial Commands: This is zero, one, or more commands that will be executed when a terminal window
-                    starts up.  They are only executed when initially created or a "restart" is
-                    performed on the window.
+					starts up.  They are only executed when initially created or a "restart" is
+					performed on the window.
  
 ## Unicode and UTF-8 encoding
 
@@ -141,14 +141,14 @@ markeel
 ## Version History
 
 * 0.99
-    * Support for Editor Settings
-    * Better support for Unicode
+	* Support for Editor Settings
+	* Better support for Unicode
 
 * 0.95
-    * Support for Windows
+	* Support for Windows
 
 * 0.9
-    * Initial Release
+	* Initial Release
 
 ## License
 
