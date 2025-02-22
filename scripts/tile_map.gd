@@ -74,12 +74,14 @@ func check_piece(piece) -> bool:
 	return true
 
 
-func move(direction: Vector2i):
+func move(direction: Vector2i) -> bool:
 	var new_piece = current_piece.duplicate()
 	new_piece.move(direction)
 	if check_piece(new_piece):
 		current_piece.move(direction)
 		last_spin_distance = -1
+		return true
+	return false
 
 
 func rotate_clockwise():
@@ -102,7 +104,7 @@ func rotate_counterclockwise():
 		new_piece.rotate_counterclockwise()
 		if check_piece(new_piece):
 			current_piece = new_piece
-			last_spin_distance = abs(kick[0]) + abs(-kick[1]) 
+			last_spin_distance = abs(kick[0]) + abs(kick[1]) 
 			break
 
 
@@ -115,6 +117,7 @@ func rotate_180():
 		new_piece.rotate_counterclockwise()
 		if check_piece(new_piece):
 			current_piece = new_piece
+			last_spin_distance = abs(kick[0]) + abs(kick[1]) 
 			break
 
 
@@ -128,18 +131,13 @@ func lock_piece():
 
 
 func max_move(direction: Vector2i):
-	while true:
-		var new_piece = current_piece.duplicate()
-		new_piece.move(direction)
-		if check_piece(new_piece):
-			current_piece = new_piece
-		else:
-			break
-
+	while move(direction):
+		pass
 
 func hard_drop():
 	max_move(Vector2i.DOWN)
 	lock_piece()
+	last_spin_distance = -1
 
 func draw_piece_on_layer(piece, layer):
 	var piece_tiles = piece.get_tiles()
@@ -247,18 +245,34 @@ func draw_HUD_piece():
 func _on_piece_drop_timer_timeout():
 	move(Vector2i.DOWN)
 
-
+# Check if move is spin.
+# If spin move by more than 3, is auto a spin
+# T spin are checked as usual. For other pieces except I, return true if exist a tile above
 func check_spin() -> bool:
+	if last_spin_distance >= 3:
+		return true
 	if current_piece.piece_name == "T":
-		if last_spin_distance >= 3:
-			return true
 		var count = 0
 		var corner_positions = [Vector2i(0, 0), Vector2i(0, 2), Vector2i(2, 0), Vector2i(2, 2)]
 		for i in corner_positions:
 			if not check_valid_tile(current_piece.position + i):
 				count += 1
-		print(count)
 		return count >= 3 and last_spin_distance != -1
+	else:
+		if current_piece.piece_name == "O" or current_piece.piece_name == "I":
+			return false
+		else:
+			var count = 0
+			for i in current_piece.grid_size:
+				for j in current_piece.grid_size:
+					var pos = current_piece.position + Vector2i(j, i)
+					if current_piece.grid[i][j] == 0 or (i >= 1 and current_piece.grid[i-1][j] == 1):
+						continue
+					if not check_valid_tile(pos + Vector2i.UP):
+						count += 1
+			print(count)
+			print(last_spin_distance)
+			return count >= 1 and last_spin_distance != -1
 	return false
 			
 	
