@@ -16,6 +16,7 @@ var paused = false
 var inventory = []
 var ghost_piece_enabled = true
 var last_spin_distance = -1
+var already_hold = false
 
 enum layers { background, existing_tiles, ghost_piece, current_piece, HUD }
 
@@ -120,13 +121,18 @@ func rotate_180():
 			last_spin_distance = abs(kick[0]) + abs(kick[1]) 
 			break
 
+#reset variables associated with each piece
+func reset_piece():
+	already_hold = false
+	last_spin_distance = -1
+	current_piece.set_piece($PieceQueue.get_next_piece())
 
 func lock_piece():
 	var piece_tiles = current_piece.get_tiles()
 	for cell in piece_tiles:
 		set_cell(1, cell[0], 0, Vector2i(0, 0), cell[1])
 	clear_lines()
-	current_piece.set_piece($PieceQueue.get_next_piece())
+	reset_piece()
 	check_game_over()
 
 
@@ -146,6 +152,8 @@ func draw_piece_on_layer(piece, layer):
 
 
 func hold_piece():
+	if already_hold == true:
+		return
 	if holding_piece.piece_id != 0:
 		var new_holding_piece = current_piece.duplicate()
 		new_holding_piece.reset_to_default()
@@ -156,6 +164,7 @@ func hold_piece():
 		holding_piece = current_piece.duplicate()
 		holding_piece.reset_to_default()
 		current_piece.set_piece($PieceQueue.get_next_piece())
+	already_hold = true
 
 
 func draw_ghost_piece():
