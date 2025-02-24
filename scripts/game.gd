@@ -57,12 +57,13 @@ func process_multiplier():
 func clear_lines(count: int, is_spin_move: bool, last_piece: String):
 	score += multiplier * count * count * 100 + 100
 
-	process_multiplier()
 	process_combo(count)
+	process_multiplier()
 
 	if is_charged:
 		is_charged = false
 		charge = 0
+		process_multiplier()
 
 	charge += 0.1 * count
 	charge = min(charge, 1.0)

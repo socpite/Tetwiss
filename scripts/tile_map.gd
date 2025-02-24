@@ -37,8 +37,6 @@ func _ready():
 	$PauseBlur.hide()
 	current_piece.set_piece($PieceQueue.get_next_piece())
 	$PieceDropTimer.start()
-	Events.open_shop.emit()
-
 
 func check_pause():
 	if Input.is_action_just_pressed("pause"):
