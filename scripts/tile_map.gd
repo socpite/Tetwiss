@@ -65,6 +65,7 @@ func unpause():
 func check_valid_tile(position: Vector2i) -> bool:
 	return 0 <= position.x and position.x < board_length and 0 <= position.y and position.y < board_height and get_cell_source_id(1, position) == -1
 
+
 #Check if whole piece is valid
 func check_piece(piece) -> bool:
 	var data = piece.get_tiles()
@@ -93,7 +94,7 @@ func rotate_clockwise():
 		new_piece.rotate_clockwise()
 		if check_piece(new_piece):
 			current_piece = new_piece
-			last_spin_distance = abs(kick[0]) + abs(-kick[1]) 
+			last_spin_distance = abs(kick[0]) + abs(-kick[1])
 			break
 
 
@@ -105,7 +106,7 @@ func rotate_counterclockwise():
 		new_piece.rotate_counterclockwise()
 		if check_piece(new_piece):
 			current_piece = new_piece
-			last_spin_distance = abs(kick[0]) + abs(kick[1]) 
+			last_spin_distance = abs(kick[0]) + abs(kick[1])
 			break
 
 
@@ -118,14 +119,16 @@ func rotate_180():
 		new_piece.rotate_counterclockwise()
 		if check_piece(new_piece):
 			current_piece = new_piece
-			last_spin_distance = abs(kick[0]) + abs(kick[1]) 
+			last_spin_distance = abs(kick[0]) + abs(kick[1])
 			break
+
 
 #reset variables associated with each piece
 func reset_piece():
 	already_hold = false
 	last_spin_distance = -1
 	current_piece.set_piece($PieceQueue.get_next_piece())
+
 
 func lock_piece():
 	var piece_tiles = current_piece.get_tiles()
@@ -140,10 +143,12 @@ func max_move(direction: Vector2i):
 	while move(direction):
 		pass
 
+
 func hard_drop():
 	max_move(Vector2i.DOWN)
 	lock_piece()
 	last_spin_distance = -1
+
 
 func draw_piece_on_layer(piece, layer):
 	var piece_tiles = piece.get_tiles()
@@ -196,7 +201,8 @@ func draw_piece_queue():
 		current_position += Vector2i(0, piece.grid_size)
 	pass
 
-# Update board when piece is locked. called in lock_piece, before getting new piece in queue. 
+
+# Update board when piece is locked. called in lock_piece, before getting new piece in queue.
 # Emmit signal about move, spin, and last piece
 func clear_lines():
 	var count_lines_cleared = 0
@@ -215,7 +221,7 @@ func clear_lines():
 			count_lines_cleared += 1
 
 	clear_lines_signal.emit(count_lines_cleared, check_spin(), current_piece.piece_name)
-	
+
 	clear_layer(layers.existing_tiles)
 
 	board.reverse()
@@ -223,7 +229,6 @@ func clear_lines():
 	for i in board.size():
 		for j in board_length:
 			set_cell(layers.existing_tiles, Vector2i(j, board_height - 1 - i), 0, Vector2i(0, 0), board[i][j])
-	
 
 
 func get_score():
@@ -250,36 +255,41 @@ func draw_HUD_piece():
 	draw_holding_piece()
 	draw_piece_queue()
 
+
 # gravity drop
 func _on_piece_drop_timer_timeout():
 	move(Vector2i.DOWN)
 
-# Check if move is spin.
-# If spin move by more than 3, is auto a spin
-# T spin are checked as usual. For other pieces except I, return true if exist a tile above
+
+# Check if 3 corners are filled
+func check_t_spin() -> bool:
+	var count = 0
+	var corner_positions = [Vector2i(0, 0), Vector2i(0, 2), Vector2i(2, 0), Vector2i(2, 2)]
+	for i in corner_positions:
+		if not check_valid_tile(current_piece.position + i):
+			count += 1
+	return count >= 3 and last_spin_distance != -1
+
+
+# Check if there is a tile above one of the piece tiles
+func check_other_spin() -> bool:
+	var count = 0
+	for i in current_piece.grid_size:
+		for j in current_piece.grid_size:
+			var pos = current_piece.position + Vector2i(j, i)
+			if current_piece.grid[i][j] == 0 or (i >= 1 and current_piece.grid[i - 1][j] == 1):
+				continue
+			if not check_valid_tile(pos + Vector2i.UP):
+				count += 1
+	return count >= 1 and last_spin_distance != -1
+
+
 func check_spin() -> bool:
 	if last_spin_distance >= 3:
 		return true
+	if current_piece.piece_name == "O" or current_piece.piece_name == "I":
+		return false
 	if current_piece.piece_name == "T":
-		var count = 0
-		var corner_positions = [Vector2i(0, 0), Vector2i(0, 2), Vector2i(2, 0), Vector2i(2, 2)]
-		for i in corner_positions:
-			if not check_valid_tile(current_piece.position + i):
-				count += 1
-		return count >= 3 and last_spin_distance != -1
+		return check_t_spin()
 	else:
-		if current_piece.piece_name == "O" or current_piece.piece_name == "I":
-			return false
-		else:
-			var count = 0
-			for i in current_piece.grid_size:
-				for j in current_piece.grid_size:
-					var pos = current_piece.position + Vector2i(j, i)
-					if current_piece.grid[i][j] == 0 or (i >= 1 and current_piece.grid[i-1][j] == 1):
-						continue
-					if not check_valid_tile(pos + Vector2i.UP):
-						count += 1
-			return count >= 1 and last_spin_distance != -1
-	return false
-			
-	
+		return check_other_spin()
