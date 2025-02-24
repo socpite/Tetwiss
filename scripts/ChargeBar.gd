@@ -11,7 +11,7 @@ func _ready():
 	full_rect = get_region_rect()
 
 func _process(delta):
-	if target_charge - current_charge < eps:
+	if abs(target_charge - current_charge) < eps:
 		current_charge = target_charge
 	else:
 		current_charge += (target_charge - current_charge)*speed*delta

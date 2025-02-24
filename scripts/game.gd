@@ -6,6 +6,8 @@ var multiplier = 1.0
 var current_level = 0
 var target_score = 0
 var charge = 0.0
+var charge_attack_cost = 1.0
+var is_charged = true
 
 var boss_list: Array = Data.boss_data.keys()
 
@@ -22,6 +24,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("hack"):
 		score += 1000
 	
+	detect_use_charge()
 	if score >= target_score:
 		set_level(current_level + 1)
 	display()
@@ -42,21 +45,27 @@ func process_combo(lines_cleared):
 	else:
 		combo = 0
 
-
 func process_multiplier():
 	multiplier = combo + 1
 	for item in $Inventory.items:
 		item.item_instance.modify(self)
+	if is_charged:
+		multiplier *= 2
 
 
 
 func clear_lines(count: int, is_spin_move: bool, last_piece: String):
 	score += multiplier * count * count * 100 + 100
 
-	process_combo(count)
 	process_multiplier()
+	process_combo(count)
+
+	if is_charged:
+		is_charged = false
+		charge = 0
 
 	charge += 0.1 * count
+	charge = min(charge, 1.0)
 
 func init_boss():
 	$Boss.set_boss(boss_list.pick_random())
@@ -80,3 +89,12 @@ func set_level(level):
 
 func display():
 	$Level.display(self)
+
+func detect_use_charge():
+	if Input.is_action_just_pressed("charge_attack"):
+		print(charge)
+		if charge >= 1.0:
+			print("charged!")
+			is_charged = true
+			process_multiplier()
+	

@@ -279,8 +279,6 @@ func check_spin() -> bool:
 						continue
 					if not check_valid_tile(pos + Vector2i.UP):
 						count += 1
-			print(count)
-			print(last_spin_distance)
 			return count >= 1 and last_spin_distance != -1
 	return false
 			
