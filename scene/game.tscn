@@ -107,6 +107,9 @@ offset_top = -73.5
 offset_right = 483.0
 offset_bottom = 265.5
 
+[node name="AutoLockTimer" type="Timer" parent="TileMap"]
+wait_time = 3.0
+
 [node name="Level" type="Node2D" parent="."]
 position = Vector2(45, 4)
 script = ExtResource("6_cth57")
@@ -214,4 +217,5 @@ scale = Vector2(0.7, 0.7)
 [connection signal="timeout" from="TileMap/InputHandler/ARRLeftTimer" to="TileMap/InputHandler" method="_on_arr_left_timer_timeout"]
 [connection signal="timeout" from="TileMap/InputHandler/ARRRightTimer" to="TileMap/InputHandler" method="_on_arr_right_timer_timeout"]
 [connection signal="timeout" from="TileMap/InputHandler/SDRTimer" to="TileMap/InputHandler" method="_on_sdr_timer_timeout"]
+[connection signal="timeout" from="TileMap/AutoLockTimer" to="TileMap" method="auto_lock"]
 [connection signal="timeout" from="Level/SpinMoveLabel/FadeTimer" to="Level/SpinMoveLabel" method="_on_fade_timer_timeout"]

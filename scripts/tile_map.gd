@@ -17,6 +17,7 @@ var inventory = []
 var ghost_piece_enabled = true
 var last_spin_distance = -1
 var already_hold = false
+var maximum_height = 0
 
 enum layers { background, existing_tiles, ghost_piece, current_piece, HUD }
 
@@ -27,6 +28,8 @@ func _process(delta):
 	if paused:
 		return
 
+	update_maximum_height()
+
 	if ghost_piece_enabled:
 		draw_ghost_piece()
 	draw_current_piece()
@@ -35,8 +38,7 @@ func _process(delta):
 
 func _ready():
 	$PauseBlur.hide()
-	current_piece.set_piece($PieceQueue.get_next_piece())
-	$PieceDropTimer.start()
+	reset_piece()
 
 func check_pause():
 	if Input.is_action_just_pressed("pause"):
@@ -123,8 +125,17 @@ func rotate_180():
 
 #reset variables associated with each piece
 func reset_piece():
+	$PieceDropTimer.stop()
+	$PieceDropTimer.start()
+	
+	$AutoLockTimer.stop()
+	$AutoLockTimer.start()
+	maximum_height = 0
+	
 	already_hold = false
+	
 	last_spin_distance = -1
+	
 	current_piece.set_piece($PieceQueue.get_next_piece())
 
 
@@ -291,3 +302,14 @@ func check_spin() -> bool:
 		return check_t_spin()
 	else:
 		return check_other_spin()
+
+
+func update_maximum_height():
+	if current_piece.position.y > maximum_height:
+		$AutoLockTimer.stop()
+		$AutoLockTimer.start()
+		maximum_height = current_piece.position.y
+		print(maximum_height)
+
+func auto_lock():
+	hard_drop()
