@@ -201,6 +201,7 @@ scale = Vector2(0.7, 0.7)
 [connection signal="clear_lines_signal" from="TileMap" to="." method="clear_lines"]
 [connection signal="clear_lines_signal" from="TileMap" to="Level/SpinMoveLabel" method="_on_tile_map_clear_lines_signal"]
 [connection signal="timeout" from="TileMap/PieceDropTimer" to="TileMap" method="_on_piece_drop_timer_timeout"]
+[connection signal="charge_attack" from="TileMap/InputHandler" to="." method="use_charge"]
 [connection signal="hard_drop" from="TileMap/InputHandler" to="TileMap" method="hard_drop"]
 [connection signal="hold_piece" from="TileMap/InputHandler" to="TileMap" method="hold_piece"]
 [connection signal="max_move" from="TileMap/InputHandler" to="TileMap" method="max_move"]

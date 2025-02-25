@@ -20,6 +20,7 @@ signal rotate_counterclockwise
 signal hard_drop
 signal hold_piece
 signal rotate_180
+signal charge_attack
 
 
 # Called when the node enters the scene tree for the first time.
@@ -45,7 +46,9 @@ func _process(delta):
 	
 	left_right_handler()
 	soft_drop_handler()
+	single_action_handler()
 	
+func single_action_handler():
 	if Input.is_action_just_pressed("rotate clockwise"):
 		rotate_clockwise.emit()
 	if Input.is_action_just_pressed("rotate counterclockwise"):
@@ -56,8 +59,8 @@ func _process(delta):
 		hold_piece.emit()
 	if Input.is_action_just_pressed("rotate 180"):
 		rotate_180.emit()
-	
-	
+	if Input.is_action_just_pressed("charge_attack"):
+		emit_signal("charge_attack")
 
 func left_right_handler():
 	if Input.is_action_just_pressed("left"):

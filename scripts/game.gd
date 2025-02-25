@@ -24,7 +24,6 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("hack"):
 		score += 1000
 	
-	detect_use_charge()
 	if score >= target_score:
 		set_level(current_level + 1)
 	display()
@@ -91,11 +90,10 @@ func set_level(level):
 func display():
 	$Level.display(self)
 
-func detect_use_charge():
-	if Input.is_action_just_pressed("charge_attack"):
-		print(charge)
-		if charge >= 1.0:
-			print("charged!")
-			is_charged = true
-			process_multiplier()
+func use_charge():
+	print(charge)
+	if charge >= 1.0:
+		print("charged!")
+		is_charged = true
+		process_multiplier()
 	
