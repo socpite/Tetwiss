@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://d4moacxp2ga7h"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_4kcuh"]
-[ext_resource type="Script" path="res://scripts/menu.gd" id="2_76ycs"]
+[ext_resource type="Script" uid="uid://i32cfrf7cgqu" path="res://scripts/main.gd" id="1_4kcuh"]
+[ext_resource type="Script" uid="uid://b4l0uddi6uksd" path="res://scripts/menu.gd" id="2_76ycs"]
 [ext_resource type="Texture2D" uid="uid://c6tebwrw7nxlw" path="res://assets/game_title.png" id="3_u0klc"]
 [ext_resource type="Texture2D" uid="uid://dhi7b75awdtdi" path="res://assets/GUI_sprite/play_button.png" id="4_a7ntn"]
-[ext_resource type="Script" path="res://scene/fps_counter.gd" id="5_lcahi"]
+[ext_resource type="Script" uid="uid://cmm41fv5uhisq" path="res://scene/fps_counter.gd" id="5_lcahi"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_4kcuh")

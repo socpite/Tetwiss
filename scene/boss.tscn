@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b4ced4qq8ab8s"]
 
-[ext_resource type="Script" path="res://scripts/boss.gd" id="1_4mssk"]
+[ext_resource type="Script" uid="uid://mebdtn204ksa" path="res://scripts/boss.gd" id="1_4mssk"]
 [ext_resource type="Texture2D" uid="uid://cbb3av7hdf38m" path="res://assets/GUI_sprite/boss_background.jpg" id="2_f8mvv"]
 [ext_resource type="Texture2D" uid="uid://dx3fpgmcuptxi" path="res://assets/bosses/The Fluff/icon.jpg" id="2_hcq0k"]
 

@@ -20,7 +20,6 @@ func _ready() -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
 	if Input.is_action_just_pressed("hack"):
 		score += 1000
 	
@@ -91,7 +90,7 @@ func display():
 	$Level.display(self)
 
 func use_charge():
-	print(charge)
+	print(charge);
 	if charge >= 1.0:
 		print("charged!")
 		is_charged = true

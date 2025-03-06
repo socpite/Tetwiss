@@ -1,17 +1,19 @@
-[gd_scene load_steps=18 format=3 uid="uid://b1gx15v71ge15"]
+[gd_scene load_steps=20 format=3 uid="uid://b1gx15v71ge15"]
 
 [ext_resource type="Texture2D" uid="uid://capn7wain57ar" path="res://assets/GUI_sprite/square_set.png" id="1_ixdtv"]
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_ntxld"]
+[ext_resource type="Script" uid="uid://c7y7i8qorsl72" path="res://scripts/game.gd" id="1_ntxld"]
 [ext_resource type="Texture2D" uid="uid://wyve4t5bny04" path="res://assets/GUI_sprite/square_background.png" id="2_xbsld"]
-[ext_resource type="Script" path="res://scripts/tile_map.gd" id="3_mpuo0"]
-[ext_resource type="Script" path="res://scripts/PieceQueue.gd" id="4_0vj3b"]
-[ext_resource type="Script" path="res://scripts/InputHandler.gd" id="5_glex3"]
-[ext_resource type="Script" path="res://scripts/Level.gd" id="6_cth57"]
+[ext_resource type="Script" uid="uid://cd264fsac3q3i" path="res://scripts/tile_map.gd" id="3_mpuo0"]
+[ext_resource type="Script" uid="uid://bujyvyljc5ejp" path="res://scripts/PieceQueue.gd" id="4_0vj3b"]
+[ext_resource type="Script" uid="uid://do12uxobnkg7j" path="res://scripts/InputHandler.gd" id="5_glex3"]
+[ext_resource type="Script" uid="uid://cyue7hhxlx1l3" path="res://scripts/Level.gd" id="6_cth57"]
 [ext_resource type="Texture2D" uid="uid://dl6ohc02vpxf6" path="res://assets/charge_bar.png" id="7_q2jha"]
-[ext_resource type="Script" path="res://scripts/ChargeBar.gd" id="8_t42de"]
-[ext_resource type="Script" path="res://scripts/Inventory.gd" id="9_mwxk3"]
-[ext_resource type="Shader" path="res://scene/blur.gdshader" id="10_qnmrm"]
-[ext_resource type="Script" path="res://scene/spin_move_label.gd" id="11_kbu3f"]
+[ext_resource type="Script" uid="uid://cely6f32ajh8q" path="res://scripts/ChargeBar.gd" id="8_t42de"]
+[ext_resource type="AudioStream" uid="uid://cns3punlixiit" path="res://assets/Audio/osu-hit-sound.mp3" id="9_hguvt"]
+[ext_resource type="Script" uid="uid://chn6ac1l7sdab" path="res://scripts/Inventory.gd" id="9_mwxk3"]
+[ext_resource type="AudioStream" uid="uid://0kkutm31exu7" path="res://assets/Audio/spinnerbonus.wav" id="10_0lu6w"]
+[ext_resource type="Shader" uid="uid://dwbyqlegps0p0" path="res://scene/blur.gdshader" id="10_qnmrm"]
+[ext_resource type="Script" uid="uid://bv5hlj4v522ht" path="res://scene/spin_move_label.gd" id="11_kbu3f"]
 [ext_resource type="PackedScene" uid="uid://b4ced4qq8ab8s" path="res://scene/boss.tscn" id="12_8ll6t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2c3e3"]
@@ -109,6 +111,15 @@ offset_bottom = 265.5
 
 [node name="AutoLockTimer" type="Timer" parent="TileMap"]
 wait_time = 3.0
+
+[node name="MoveAudio" type="AudioStreamPlayer" parent="TileMap"]
+stream = ExtResource("9_hguvt")
+volume_db = -20.0
+max_polyphony = 2
+
+[node name="SpinAudio" type="AudioStreamPlayer" parent="TileMap"]
+stream = ExtResource("10_0lu6w")
+volume_db = -10.0
 
 [node name="Level" type="Node2D" parent="."]
 position = Vector2(45, 4)

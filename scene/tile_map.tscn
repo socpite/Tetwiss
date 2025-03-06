@@ -2,14 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://capn7wain57ar" path="res://assets/GUI_sprite/square_set.png" id="1_ks840"]
 [ext_resource type="Texture2D" uid="uid://wyve4t5bny04" path="res://assets/GUI_sprite/square_background.png" id="2_n1ddr"]
-[ext_resource type="Script" path="res://scripts/tile_map.gd" id="3_867pe"]
-[ext_resource type="Script" path="res://scripts/PieceQueue.gd" id="4_27gu6"]
-[ext_resource type="Script" path="res://scripts/InputHandler.gd" id="5_8fh7r"]
-[ext_resource type="Script" path="res://scripts/Level.gd" id="6_34who"]
+[ext_resource type="Script" uid="uid://cd264fsac3q3i" path="res://scripts/tile_map.gd" id="3_867pe"]
+[ext_resource type="Script" uid="uid://bujyvyljc5ejp" path="res://scripts/PieceQueue.gd" id="4_27gu6"]
+[ext_resource type="Script" uid="uid://do12uxobnkg7j" path="res://scripts/InputHandler.gd" id="5_8fh7r"]
+[ext_resource type="Script" uid="uid://cyue7hhxlx1l3" path="res://scripts/Level.gd" id="6_34who"]
 [ext_resource type="Texture2D" uid="uid://dl6ohc02vpxf6" path="res://assets/charge_bar.png" id="7_misee"]
-[ext_resource type="Script" path="res://scripts/ChargeBar.gd" id="8_k88vh"]
-[ext_resource type="Shader" path="res://scene/blur.gdshader" id="9_3fu1i"]
-[ext_resource type="Script" path="res://scripts/Inventory.gd" id="9_asag2"]
+[ext_resource type="Script" uid="uid://cely6f32ajh8q" path="res://scripts/ChargeBar.gd" id="8_k88vh"]
+[ext_resource type="Shader" uid="uid://dwbyqlegps0p0" path="res://scene/blur.gdshader" id="9_3fu1i"]
+[ext_resource type="Script" uid="uid://chn6ac1l7sdab" path="res://scripts/Inventory.gd" id="9_asag2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2c3e3"]
 texture = ExtResource("1_ks840")

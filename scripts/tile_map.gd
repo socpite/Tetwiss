@@ -63,7 +63,7 @@ func unpause():
 
 
 func check_valid_tile(position: Vector2i) -> bool:
-	return 0 <= position.x and position.x < board_length and 0 <= position.y and position.y < board_height and get_cell_source_id(1, position) == -1
+	return 0 <= position.x and position.x < board_length and -2 <= position.y and position.y < board_height and get_cell_source_id(1, position) == -1
 
 
 #Check if whole piece is valid
@@ -76,10 +76,12 @@ func check_piece(piece) -> bool:
 	return true
 
 
-func move(direction: Vector2i) -> bool:
+func move(direction: Vector2i, silent = true) -> bool:
 	var new_piece = current_piece.duplicate()
 	new_piece.move(direction)
 	if check_piece(new_piece):
+		if !silent:
+			$MoveAudio.play()
 		current_piece.move(direction)
 		last_spin_distance = -1
 		return true
@@ -95,6 +97,8 @@ func rotate_clockwise():
 		if check_piece(new_piece):
 			current_piece = new_piece
 			last_spin_distance = abs(kick[0]) + abs(-kick[1])
+			if check_spin():
+				$SpinAudio.play()
 			break
 
 
@@ -107,6 +111,8 @@ func rotate_counterclockwise():
 		if check_piece(new_piece):
 			current_piece = new_piece
 			last_spin_distance = abs(kick[0]) + abs(kick[1])
+			if check_spin():
+				$SpinAudio.play();
 			break
 
 
@@ -120,6 +126,8 @@ func rotate_180():
 		if check_piece(new_piece):
 			current_piece = new_piece
 			last_spin_distance = abs(kick[0]) + abs(kick[1])
+			if check_spin():
+				$SpinAudio.play();
 			break
 
 
@@ -148,13 +156,13 @@ func lock_piece():
 	check_game_over()
 
 
-func max_move(direction: Vector2i):
-	while move(direction):
+func max_move(direction: Vector2i, silent = true):
+	while move(direction, silent):
 		pass
 
 
 func hard_drop():
-	max_move(Vector2i.DOWN)
+	max_move(Vector2i.DOWN, false)
 	lock_piece()
 	last_spin_distance = -1
 

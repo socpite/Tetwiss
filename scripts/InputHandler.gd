@@ -12,8 +12,8 @@ var in_arr_left = false
 var in_arr_right = false
 var paused = false
 
-signal move(direction: Vector2i)
-signal max_move(direction: Vector2i)
+signal move(direction: Vector2i, silent: bool)
+signal max_move(direction: Vector2i, silent: bool)
 
 signal rotate_clockwise
 signal rotate_counterclockwise
@@ -64,12 +64,12 @@ func single_action_handler():
 
 func left_right_handler():
 	if Input.is_action_just_pressed("left"):
-		move.emit(Vector2i.LEFT)
+		move.emit(Vector2i.LEFT, false)
 		last_input = LEFT
 		$DASLeftTimer.start()
 	
 	if Input.is_action_just_pressed("right"):
-		move.emit(Vector2i.RIGHT)
+		move.emit(Vector2i.RIGHT, false)
 		last_input = RIGHT
 		$DASRightTimer.start()
 		
@@ -98,22 +98,22 @@ func _on_das_right_timer_timeout():
 
 func left_right_arr0_move():
 	if in_arr_left and (last_input == LEFT or not Input.is_action_pressed("right")):
-		max_move.emit(Vector2i.LEFT)
+		max_move.emit(Vector2i.LEFT, false)
 	if in_arr_right and (last_input == RIGHT or not Input.is_action_pressed("left")):
-		max_move.emit(Vector2i.RIGHT)
+		max_move.emit(Vector2i.RIGHT, false)
 
 func _on_arr_left_timer_timeout():
 	if last_input == LEFT or not Input.is_action_pressed("right"):
-		move.emit(Vector2i.LEFT)
+		move.emit(Vector2i.LEFT, false)
 		
 func _on_arr_right_timer_timeout():
 	if last_input == RIGHT or not Input.is_action_pressed("left"):
-		move.emit(Vector2i.RIGHT)
+		move.emit(Vector2i.RIGHT, false)
 	
 func soft_drop_handler():
 	if SDR == 0:
 		if Input.is_action_pressed("soft drop"):
-			max_move.emit(Vector2i.DOWN)
+			max_move.emit(Vector2i.DOWN, false)
 	else:
 		if Input.is_action_just_pressed("soft drop"):
 			$SDRTimer.start()
@@ -121,5 +121,5 @@ func soft_drop_handler():
 			$SDRTimer.stop()
 	
 func _on_sdr_timer_timeout():
-	move.emit(Vector2i.DOWN)
+	move.emit(Vector2i.DOWN, false)
 	
