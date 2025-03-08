@@ -6,7 +6,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func boss_start(game):
-	var tilemap: TileMap = game.get_node("TileMap")
+	var tilemap: GameBoard = game.get_node("GameBoard")
 	var cover_height: int = tilemap.board_height/2
 	var cover_width: int = tilemap.board_length
 	
@@ -21,7 +21,7 @@ func boss_process(game):
 	pass
 
 func boss_end(game):
-	var tilemap: TileMap = game.get_node("TileMap")
+	var tilemap: GameBoard = game.get_node("GameBoard")
 	var cover_height: int = tilemap.board_height/2
 	var cover_width: int = tilemap.board_length
 	

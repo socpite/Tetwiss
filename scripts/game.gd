@@ -31,10 +31,10 @@ func _process(delta: float) -> void:
 		$Boss.boss_instance.boss_process(self)
 	
 func pause():
-	$TileMap.pause()
+	$GameBoard.pause()
 	
 func unpause():
-	$TileMap.unpause()
+	$GameBoard.unpause()
 	
 
 func process_combo(lines_cleared):

@@ -1,4 +1,5 @@
 extends Node
+class_name Piece
 
 @export var grid: Array
 @export var grid_size: int
@@ -52,7 +53,7 @@ func rotate_clockwise():
 	for i in 3:
 		rotate_counterclockwise()
 
-# Draw data in the form of pairs (position, color(which is piece_id))
+## Draw data in the form of pairs `(position, piece_id)`
 func get_tiles() -> Array:
 	var draw_data = []
 	for i in grid_size:
