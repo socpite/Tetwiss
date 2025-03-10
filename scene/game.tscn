@@ -90,6 +90,7 @@ script = ExtResource("5_glex3")
 [node name="SDRTimer" type="Timer" parent="GameBoard/InputHandler" groups=["gameplay_timers"]]
 
 [node name="PauseBlur" type="ColorRect" parent="GameBoard"]
+visible = false
 z_index = 3
 material = SubResource("ShaderMaterial_78q27")
 offset_left = -199.0
