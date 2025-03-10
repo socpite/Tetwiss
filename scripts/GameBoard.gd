@@ -99,13 +99,13 @@ func check_below() -> bool:
 	new_piece.move(Vector2i.DOWN)
 	return not check_piece(new_piece)
 
-## Move current piece, slient = false will play MoveAudio. Return true if piece is moved
+## Move current piece, slient = false will play MoveSound. Return true if piece is moved
 func move(direction: Vector2i, silent = true) -> bool:
 	var new_piece = current_piece.duplicate()
 	new_piece.move(direction)
 	if check_piece(new_piece):
 		if !silent:
-			$MoveAudio.play()
+			$MoveSound.play()
 		current_piece.move(direction)
 		last_spin_distance = -1
 		return true
@@ -122,7 +122,7 @@ func rotate_clockwise():
 			current_piece = new_piece
 			last_spin_distance = abs(kick[0]) + abs(-kick[1])
 			if check_spin() and check_below():
-				$SpinAudio.play()
+				$SpinSound.play()
 			break
 
 
@@ -136,7 +136,7 @@ func rotate_counterclockwise():
 			current_piece = new_piece
 			last_spin_distance = abs(kick[0]) + abs(kick[1])
 			if check_spin() and check_below():
-				$SpinAudio.play();
+				$SpinSound.play();
 			break
 
 
@@ -151,7 +151,7 @@ func rotate_180():
 			current_piece = new_piece
 			last_spin_distance = abs(kick[0]) + abs(kick[1])
 			if check_spin() and check_below():
-				$SpinAudio.play();
+				$SpinSound.play();
 			break
 
 

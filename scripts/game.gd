@@ -18,11 +18,13 @@ func _ready() -> void:
 	set_level(1)
 	$Boss.hide()
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+
+func process_hacks() -> void:
 	if Input.is_action_just_pressed("hack"):
 		score += 1000
-	
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
 	if score >= target_score:
 		set_level(current_level + 1)
 	display()
