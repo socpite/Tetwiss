@@ -22,9 +22,13 @@ func _ready() -> void:
 func process_hacks() -> void:
 	if Input.is_action_just_pressed("hack"):
 		score += 1000
+	if Input.is_action_just_pressed("hack next piece"):
+		$GameBoard.reset_piece()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	process_hacks()
+	
 	if score >= target_score:
 		set_level(current_level + 1)
 	display()

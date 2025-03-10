@@ -154,7 +154,7 @@ func rotate_180():
 				$SpinSound.play();
 			break
 
-
+var debug_count = 0
 #reset variables associated with each piece
 func reset_piece():
 	$PieceDropTimer.stop()
@@ -167,8 +167,8 @@ func reset_piece():
 	already_hold = false
 	
 	last_spin_distance = -1
-	
-	
+	debug_count += 1
+	print(debug_count)
 	current_piece.set_piece($PieceQueue.get_next_piece())
 
 
@@ -339,7 +339,6 @@ func update_maximum_height():
 		$AutoLockTimer.stop()
 		$AutoLockTimer.start()
 		maximum_height = current_piece.position.y
-		print(maximum_height)
 
 func auto_lock():
 	hard_drop()
