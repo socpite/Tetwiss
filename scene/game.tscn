@@ -255,4 +255,5 @@ scale = Vector2(0.7, 0.7)
 [connection signal="timeout" from="GameBoard/InputHandler/SDRTimer" to="GameBoard/InputHandler" method="_on_sdr_timer_timeout"]
 [connection signal="timeout" from="GameBoard/PieceDropTimer" to="GameBoard" method="_on_piece_drop_timer_timeout"]
 [connection signal="timeout" from="GameBoard/AutoLockTimer" to="GameBoard" method="auto_lock"]
+[connection signal="finished" from="GameBoard/ClearSound" to="GameBoard/ClearSound" method="_on_finished"]
 [connection signal="timeout" from="Level/SpinMoveLabel/FadeTimer" to="Level/SpinMoveLabel" method="_on_fade_timer_timeout"]
