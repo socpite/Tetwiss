@@ -10,6 +10,7 @@ var charge: float
 
 func _ready():
 	$ComboLabel.hide()
+	$SpinMoveLabel.text = ""
 
 
 func _process(delta):

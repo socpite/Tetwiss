@@ -47,6 +47,8 @@ func process_combo(lines_cleared):
 	if lines_cleared > 0:
 		combo += 1
 	else:
+		if combo >= 4:
+			$ComboBreakSound.play()
 		combo = 0
 
 func process_multiplier():
@@ -71,6 +73,8 @@ func clear_lines(count: int, is_spin_move: bool, last_piece: String):
 
 	charge += 0.1 * count
 	charge = min(charge, 1.0)
+	
+	$ClearSound.play_sound(count)
 
 func init_boss():
 	$Boss.set_boss(boss_list.pick_random())

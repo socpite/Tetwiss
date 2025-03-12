@@ -9,7 +9,7 @@ var need_pitch_reset = false
 func _ready() -> void:
 	pitch_scale = start_pitch
 
-func play_sound(line_count: int, is_spin_move: bool, last_piece: String) -> void:
+func play_sound(line_count: int) -> void:
 	if line_count == 0:
 		need_pitch_reset = true
 		return

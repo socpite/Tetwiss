@@ -23,6 +23,7 @@ var maximum_height = 0
 
 var layers
 
+
 # Called when the node enters the scene tree for the first time.
 func _process(delta):
 	check_pause()
@@ -35,28 +36,32 @@ func _process(delta):
 		draw_ghost_piece()
 	draw_current_piece()
 	draw_HUD_piece()
-	
 
 
 func _ready():
 	$PauseBlur.hide()
 	reset_piece()
-	
+
 	layers = {
 		background = $TileMapLayers/Background,
 		existing_tiles = $TileMapLayers/ExistingTiles,
 		ghost_piece = $TileMapLayers/GhostPiece,
 		current_piece = $TileMapLayers/CurrentPiece,
 		HUD = $TileMapLayers/HUD,
+		hold_piece = $HoldPiece/Piece,
+		piece_queue = $PieceQueue/Pieces,
 	}
+
 
 ## Interface item/boss ease of use
 func set_cell(layer: TileMapLayer, coords: Vector2i, source_id: int = -1, atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0):
 	layer.set_cell(coords, source_id, atlas_coords, alternative_tile)
 
+
 ## Interface item/boss ease of use
 func clear_layer(layer: TileMapLayer):
 	layer.clear()
+
 
 func check_pause():
 	if Input.is_action_just_pressed("pause"):
@@ -93,11 +98,13 @@ func check_piece(piece) -> bool:
 
 	return true
 
+
 ## Check for any tiles below the piece
 func check_below() -> bool:
 	var new_piece: Piece = current_piece.duplicate()
 	new_piece.move(Vector2i.DOWN)
 	return not check_piece(new_piece)
+
 
 ## Move current piece, slient = false will play MoveSound. Return true if piece is moved
 func move(direction: Vector2i, silent = true) -> bool:
@@ -136,7 +143,7 @@ func rotate_counterclockwise():
 			current_piece = new_piece
 			last_spin_distance = abs(kick[0]) + abs(kick[1])
 			if check_spin() and check_below():
-				$SpinSound.play();
+				$SpinSound.play()
 			break
 
 
@@ -151,21 +158,24 @@ func rotate_180():
 			current_piece = new_piece
 			last_spin_distance = abs(kick[0]) + abs(kick[1])
 			if check_spin() and check_below():
-				$SpinSound.play();
+				$SpinSound.play()
 			break
 
+
 var debug_count = 0
+
+
 #reset variables associated with each piece
 func reset_piece():
 	$PieceDropTimer.stop()
 	$PieceDropTimer.start()
-	
+
 	$AutoLockTimer.stop()
 	$AutoLockTimer.start()
 	maximum_height = 0
-	
+
 	already_hold = false
-	
+
 	last_spin_distance = -1
 	debug_count += 1
 	print(debug_count)
@@ -194,6 +204,7 @@ func draw_piece_on_layer(piece: Piece, layer: TileMapLayer):
 	var piece_tiles = piece.get_tiles()
 	for cell in piece_tiles:
 		layer.set_cell(cell[0], 0, Vector2i(0, 0), cell[1])
+
 
 func hold_piece():
 	if already_hold == true:
@@ -225,18 +236,19 @@ func draw_current_piece():
 
 
 func draw_holding_piece():
-	holding_piece.position = HOLDING_PIECE_POSITION
-	draw_piece_on_layer(holding_piece, layers.HUD)
+	holding_piece.position = Vector2i(0, 0)
+	$HoldPiece.center_piece(holding_piece.piece_name)
+	draw_piece_on_layer(holding_piece, layers.hold_piece)
 
 
 func draw_piece_queue():
-	var current_position = QUEUE_POSITION
+	var current_position = Vector2i(0, 0)
 	var piece_queue = $PieceQueue.get_top_queue(queue_sight)
 	for piece_name in piece_queue:
 		var piece: Piece = Piece.new()
 		piece.set_piece(piece_name)
 		piece.position = current_position
-		draw_piece_on_layer(piece, layers.HUD)
+		draw_piece_on_layer(piece, layers.piece_queue)
 		current_position += Vector2i(0, piece.grid_size)
 	pass
 
@@ -279,18 +291,13 @@ func check_game_over():
 		Events.game_over.emit()
 
 
-func clear_HUD():
-	for i in 4:
-		for j in 4:
-			layers.HUD.set_cell(HOLDING_PIECE_POSITION + Vector2i(i, j))
-
-	for i in 30:
-		for j in 30:
-			layers.HUD.set_cell(QUEUE_POSITION + Vector2i(i, j))
+func clear_HUD_piece():
+	clear_layer(layers.piece_queue)
+	clear_layer(layers.hold_piece)
 
 
 func draw_HUD_piece():
-	clear_HUD()
+	clear_HUD_piece()
 	draw_holding_piece()
 	draw_piece_queue()
 
@@ -339,6 +346,7 @@ func update_maximum_height():
 		$AutoLockTimer.stop()
 		$AutoLockTimer.start()
 		maximum_height = current_piece.position.y
+
 
 func auto_lock():
 	hard_drop()

@@ -1,57 +1,26 @@
-[gd_scene load_steps=22 format=4 uid="uid://b1gx15v71ge15"]
+[gd_scene load_steps=23 format=4 uid="uid://b1gx15v71ge15"]
 
-[ext_resource type="Texture2D" uid="uid://capn7wain57ar" path="res://assets/GUI_sprite/square_set.png" id="1_ixdtv"]
 [ext_resource type="Script" uid="uid://c7y7i8qorsl72" path="res://scripts/game.gd" id="1_ntxld"]
-[ext_resource type="Texture2D" uid="uid://wyve4t5bny04" path="res://assets/GUI_sprite/square_background.png" id="2_xbsld"]
+[ext_resource type="Texture2D" uid="uid://dk8divtsl3cqt" path="res://assets/board_border.png" id="3_jrd6n"]
 [ext_resource type="Script" uid="uid://cd264fsac3q3i" path="res://scripts/GameBoard.gd" id="3_mpuo0"]
 [ext_resource type="Script" uid="uid://bujyvyljc5ejp" path="res://scripts/PieceQueue.gd" id="4_0vj3b"]
+[ext_resource type="TileSet" uid="uid://cc3fbd2pcmd56" path="res://assets/tileset.tres" id="4_ux4dc"]
 [ext_resource type="Script" uid="uid://do12uxobnkg7j" path="res://scripts/InputHandler.gd" id="5_glex3"]
+[ext_resource type="Texture2D" uid="uid://daoiribhvjt2x" path="res://assets/hold_border.png" id="5_jrd6n"]
 [ext_resource type="Script" uid="uid://cyue7hhxlx1l3" path="res://scripts/Level.gd" id="6_cth57"]
+[ext_resource type="Texture2D" uid="uid://ue221myluxlh" path="res://assets/queue_border.png" id="6_ww6yf"]
 [ext_resource type="Texture2D" uid="uid://dl6ohc02vpxf6" path="res://assets/charge_bar.png" id="7_q2jha"]
 [ext_resource type="Script" uid="uid://cely6f32ajh8q" path="res://scripts/ChargeBar.gd" id="8_t42de"]
 [ext_resource type="AudioStream" uid="uid://cns3punlixiit" path="res://assets/Audio/osu-hit-sound.mp3" id="9_hguvt"]
 [ext_resource type="Script" uid="uid://chn6ac1l7sdab" path="res://scripts/Inventory.gd" id="9_mwxk3"]
 [ext_resource type="AudioStream" uid="uid://0kkutm31exu7" path="res://assets/Audio/spinnerbonus.wav" id="10_0lu6w"]
 [ext_resource type="AudioStream" uid="uid://dww2kekcbyqfe" path="res://assets/Audio/Meow2.mp3" id="10_i6gbm"]
+[ext_resource type="Script" uid="uid://b143vjwv68etq" path="res://scene/hold_piece.gd" id="10_jhlss"]
 [ext_resource type="Shader" uid="uid://dwbyqlegps0p0" path="res://scripts/blur.gdshader" id="10_qnmrm"]
 [ext_resource type="Script" uid="uid://bv5hlj4v522ht" path="res://scripts/spin_move_label.gd" id="11_kbu3f"]
 [ext_resource type="Script" uid="uid://ddcg5nxewfpnw" path="res://scene/clear_sound.gd" id="11_ux4dc"]
 [ext_resource type="PackedScene" uid="uid://b4ced4qq8ab8s" path="res://scene/boss.tscn" id="12_8ll6t"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2c3e3"]
-texture = ExtResource("1_ixdtv")
-texture_region_size = Vector2i(8, 8)
-0:0/next_alternative_id = 9
-0:0/0 = 0
-0:0/1 = 1
-0:0/1/modulate = Color(0, 1, 1, 1)
-0:0/2 = 2
-0:0/2/modulate = Color(1, 1, 0, 1)
-0:0/3 = 3
-0:0/3/modulate = Color(0.501961, 0, 0.501961, 1)
-0:0/4 = 4
-0:0/4/modulate = Color(0, 1, 0, 1)
-0:0/5 = 5
-0:0/5/modulate = Color(1, 0, 0, 1)
-0:0/6 = 6
-0:0/6/modulate = Color(0, 0, 1, 1)
-0:0/7 = 7
-0:0/7/modulate = Color(1, 0.498039, 0, 1)
-0:0/8 = 8
-0:0/8/modulate = Color(0, 0, 0, 1)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3pvtj"]
-texture = ExtResource("2_xbsld")
-texture_region_size = Vector2i(8, 8)
-0:0/next_alternative_id = 2
-0:0/0 = 0
-0:0/1 = 1
-0:0/1/modulate = Color(0, 0, 0, 1)
-
-[sub_resource type="TileSet" id="TileSet_sxls5"]
-tile_size = Vector2i(8, 8)
-sources/0 = SubResource("TileSetAtlasSource_2c3e3")
-sources/1 = SubResource("TileSetAtlasSource_3pvtj")
+[ext_resource type="AudioStream" uid="uid://c2heex1hapv3q" path="res://assets/Audio/combobreak.wav" id="18_ux4dc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_78q27"]
 shader = ExtResource("10_qnmrm")
@@ -62,9 +31,7 @@ shader_parameter/color_over = Color(1, 1, 1, 0)
 [node name="Game" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -1.0
 offset_top = -3.0
-offset_right = -1.0
 offset_bottom = -3.0
 pivot_offset = Vector2(569, 287)
 script = ExtResource("1_ntxld")
@@ -73,6 +40,10 @@ script = ExtResource("1_ntxld")
 position = Vector2(200, 145)
 script = ExtResource("3_mpuo0")
 
+[node name="BoardBorder" type="Sprite2D" parent="GameBoard"]
+position = Vector2(82, 149)
+texture = ExtResource("3_jrd6n")
+
 [node name="TileMapLayers" type="Node2D" parent="GameBoard"]
 
 [node name="Background" type="TileMapLayer" parent="GameBoard/TileMapLayers"]
@@ -80,31 +51,45 @@ modulate = Color(1, 1, 1, 0.572549)
 use_parent_material = true
 scale = Vector2(2, 2)
 tile_map_data = PackedByteArray("AAAAABUAAQAAAAAAAAAAABQAAQAAAAAAAAAAABMAAQAAAAAAAAAAABIAAQAAAAAAAAAAABEAAQAAAAAAAAAAABAAAQAAAAAAAAAAAA8AAQAAAAAAAAAAAA4AAQAAAAAAAAAAAA0AAQAAAAAAAAAAAAwAAQAAAAAAAAAAAAsAAQAAAAAAAAAAAAoAAQAAAAAAAAAAAAkAAQAAAAAAAAAAAAgAAQAAAAAAAAAAAAcAAQAAAAAAAAAAAAYAAQAAAAAAAAAAAAUAAQAAAAAAAAAAAAQAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAABAAEAAQAAAAAAAAABAAIAAQAAAAAAAAABAAMAAQAAAAAAAAABAAQAAQAAAAAAAAABAAUAAQAAAAAAAAABAAYAAQAAAAAAAAABAAcAAQAAAAAAAAABAAgAAQAAAAAAAAABAAkAAQAAAAAAAAABAAoAAQAAAAAAAAABAAsAAQAAAAAAAAABAAwAAQAAAAAAAAABAA0AAQAAAAAAAAABAA4AAQAAAAAAAAABAA8AAQAAAAAAAAABABAAAQAAAAAAAAABABEAAQAAAAAAAAABABIAAQAAAAAAAAABABMAAQAAAAAAAAABABQAAQAAAAAAAAABABUAAQAAAAAAAAACABUAAQAAAAAAAAACABQAAQAAAAAAAAACABMAAQAAAAAAAAACABIAAQAAAAAAAAACABEAAQAAAAAAAAACABAAAQAAAAAAAAACAA8AAQAAAAAAAAACAA4AAQAAAAAAAAACAA0AAQAAAAAAAAACAAwAAQAAAAAAAAACAAsAAQAAAAAAAAACAAoAAQAAAAAAAAACAAkAAQAAAAAAAAACAAgAAQAAAAAAAAACAAcAAQAAAAAAAAACAAYAAQAAAAAAAAACAAUAAQAAAAAAAAACAAQAAQAAAAAAAAACAAMAAQAAAAAAAAACAAIAAQAAAAAAAAACAAEAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAADAAMAAQAAAAAAAAADAAQAAQAAAAAAAAADAAUAAQAAAAAAAAADAAYAAQAAAAAAAAADAAcAAQAAAAAAAAADAAgAAQAAAAAAAAADAAkAAQAAAAAAAAADAAoAAQAAAAAAAAADAAsAAQAAAAAAAAADAAwAAQAAAAAAAAADAA0AAQAAAAAAAAADAA4AAQAAAAAAAAADAA8AAQAAAAAAAAADABAAAQAAAAAAAAADABEAAQAAAAAAAAADABIAAQAAAAAAAAADABMAAQAAAAAAAAADABQAAQAAAAAAAAADABUAAQAAAAAAAAAEABUAAQAAAAAAAAAEABQAAQAAAAAAAAAEABMAAQAAAAAAAAAEABIAAQAAAAAAAAAEABEAAQAAAAAAAAAEABAAAQAAAAAAAAAEAA8AAQAAAAAAAAAEAA4AAQAAAAAAAAAEAA0AAQAAAAAAAAAEAAwAAQAAAAAAAAAEAAsAAQAAAAAAAAAEAAoAAQAAAAAAAAAEAAkAAQAAAAAAAAAEAAgAAQAAAAAAAAAEAAcAAQAAAAAAAAAEAAYAAQAAAAAAAAAEAAUAAQAAAAAAAAAEAAQAAQAAAAAAAAAEAAMAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAEAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAFAAEAAQAAAAAAAAAFAAIAAQAAAAAAAAAFAAMAAQAAAAAAAAAFAAQAAQAAAAAAAAAFAAUAAQAAAAAAAAAFAAYAAQAAAAAAAAAFAAcAAQAAAAAAAAAFAAgAAQAAAAAAAAAFAAkAAQAAAAAAAAAFAAoAAQAAAAAAAAAFAAsAAQAAAAAAAAAFAAwAAQAAAAAAAAAFAA0AAQAAAAAAAAAFAA4AAQAAAAAAAAAFAA8AAQAAAAAAAAAFABAAAQAAAAAAAAAFABEAAQAAAAAAAAAFABIAAQAAAAAAAAAFABMAAQAAAAAAAAAFABQAAQAAAAAAAAAFABUAAQAAAAAAAAAGABUAAQAAAAAAAAAGABQAAQAAAAAAAAAGABMAAQAAAAAAAAAGABIAAQAAAAAAAAAGABEAAQAAAAAAAAAGABAAAQAAAAAAAAAGAA8AAQAAAAAAAAAGAA4AAQAAAAAAAAAGAA0AAQAAAAAAAAAGAAwAAQAAAAAAAAAGAAsAAQAAAAAAAAAGAAoAAQAAAAAAAAAGAAkAAQAAAAAAAAAGAAgAAQAAAAAAAAAGAAcAAQAAAAAAAAAGAAYAAQAAAAAAAAAGAAUAAQAAAAAAAAAGAAQAAQAAAAAAAAAGAAMAAQAAAAAAAAAGAAIAAQAAAAAAAAAGAAEAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAHAAEAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAMAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAUAAQAAAAAAAAAHAAYAAQAAAAAAAAAHAAcAAQAAAAAAAAAHAAgAAQAAAAAAAAAHAAkAAQAAAAAAAAAHAAoAAQAAAAAAAAAHAAsAAQAAAAAAAAAHAAwAAQAAAAAAAAAHAA0AAQAAAAAAAAAHAA4AAQAAAAAAAAAHAA8AAQAAAAAAAAAHABAAAQAAAAAAAAAHABEAAQAAAAAAAAAHABIAAQAAAAAAAAAHABMAAQAAAAAAAAAHABQAAQAAAAAAAAAHABUAAQAAAAAAAAAIABUAAQAAAAAAAAAIABQAAQAAAAAAAAAIABMAAQAAAAAAAAAIABIAAQAAAAAAAAAIABEAAQAAAAAAAAAIABAAAQAAAAAAAAAIAA8AAQAAAAAAAAAIAA4AAQAAAAAAAAAIAA0AAQAAAAAAAAAIAAwAAQAAAAAAAAAIAAsAAQAAAAAAAAAIAAoAAQAAAAAAAAAIAAkAAQAAAAAAAAAIAAgAAQAAAAAAAAAIAAcAAQAAAAAAAAAIAAYAAQAAAAAAAAAIAAUAAQAAAAAAAAAIAAQAAQAAAAAAAAAIAAMAAQAAAAAAAAAIAAIAAQAAAAAAAAAIAAEAAQAAAAAAAAAIAAAAAQAAAAAAAAAJAAAAAQAAAAAAAAAJAAEAAQAAAAAAAAAJAAIAAQAAAAAAAAAJAAMAAQAAAAAAAAAJAAQAAQAAAAAAAAAJAAUAAQAAAAAAAAAJAAYAAQAAAAAAAAAJAAcAAQAAAAAAAAAJAAgAAQAAAAAAAAAJAAkAAQAAAAAAAAAJAAoAAQAAAAAAAAAJAAsAAQAAAAAAAAAJAAwAAQAAAAAAAAAJAA0AAQAAAAAAAAAJAA4AAQAAAAAAAAAJAA8AAQAAAAAAAAAJABAAAQAAAAAAAAAJABEAAQAAAAAAAAAJABIAAQAAAAAAAAAJABMAAQAAAAAAAAAJABQAAQAAAAAAAAAJABUAAQAAAAAAAAA=")
-tile_set = SubResource("TileSet_sxls5")
+tile_set = ExtResource("4_ux4dc")
+metadata/_edit_lock_ = true
 
 [node name="ExistingTiles" type="TileMapLayer" parent="GameBoard/TileMapLayers"]
 use_parent_material = true
 scale = Vector2(2, 2)
-tile_set = SubResource("TileSet_sxls5")
+tile_set = ExtResource("4_ux4dc")
 
 [node name="GhostPiece" type="TileMapLayer" parent="GameBoard/TileMapLayers"]
 modulate = Color(1, 1, 1, 0.52549)
 use_parent_material = true
 scale = Vector2(2, 2)
-tile_set = SubResource("TileSet_sxls5")
+tile_set = ExtResource("4_ux4dc")
 
 [node name="CurrentPiece" type="TileMapLayer" parent="GameBoard/TileMapLayers"]
 use_parent_material = true
 scale = Vector2(2, 2)
-tile_set = SubResource("TileSet_sxls5")
+tile_set = ExtResource("4_ux4dc")
 
 [node name="HUD" type="TileMapLayer" parent="GameBoard/TileMapLayers"]
 use_parent_material = true
 scale = Vector2(2, 2)
-tile_set = SubResource("TileSet_sxls5")
+tile_set = ExtResource("4_ux4dc")
 
-[node name="PieceQueue" type="Node" parent="GameBoard"]
+[node name="PieceQueue" type="Node2D" parent="GameBoard"]
+position = Vector2(240, 160)
 script = ExtResource("4_0vj3b")
+metadata/_edit_group_ = true
+
+[node name="Border" type="Sprite2D" parent="GameBoard/PieceQueue"]
+position = Vector2(0, 2)
+texture = ExtResource("6_ww6yf")
+
+[node name="Pieces" type="TileMapLayer" parent="GameBoard/PieceQueue"]
+use_parent_material = true
+position = Vector2(-22, -105)
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAABAAAAAAAAAAAAAwABAAEAAAAAAAAAAwAAAAEAAAAAAAAAAwACAAEAAAAAAAAAAwACAAMAAAAAAAAABAABAAMAAAAAAAAABAABAAQAAAAAAAAABAAAAAQAAAAAAAAABAAAAAYAAAAAAAAABgAAAAcAAAAAAAAABgABAAcAAAAAAAAABgACAAcAAAAAAAAABgAAAAoAAAAAAAAAAQABAAoAAAAAAAAAAQACAAoAAAAAAAAAAQADAAoAAAAAAAAAAQACAA0AAAAAAAAABwACAA4AAAAAAAAABwABAA4AAAAAAAAABwAAAA4AAAAAAAAABwA=")
+tile_set = ExtResource("4_ux4dc")
 
 [node name="InputHandler" type="Node" parent="GameBoard"]
 script = ExtResource("5_glex3")
@@ -142,19 +127,32 @@ max_polyphony = 2
 stream = ExtResource("10_0lu6w")
 volume_db = -10.0
 
-[node name="ClearSound" type="AudioStreamPlayer" parent="GameBoard"]
-stream = ExtResource("10_i6gbm")
-script = ExtResource("11_ux4dc")
+[node name="HoldPiece" type="Node2D" parent="GameBoard"]
+position = Vector2(-81, 41)
+script = ExtResource("10_jhlss")
+metadata/_edit_group_ = true
+
+[node name="Border" type="Sprite2D" parent="GameBoard/HoldPiece"]
+position = Vector2(0, -1)
+scale = Vector2(0.935129, 0.935129)
+texture = ExtResource("5_jrd6n")
+
+[node name="Piece" type="TileMapLayer" parent="GameBoard/HoldPiece"]
+use_parent_material = true
+position = Vector2(-29, -14)
+scale = Vector2(2.32, 2.32)
+tile_map_data = PackedByteArray("AAABAAAAAAAAAAAAAwABAAEAAAAAAAAAAwAAAAEAAAAAAAAAAwACAAEAAAAAAAAAAwA=")
+tile_set = ExtResource("4_ux4dc")
 
 [node name="Level" type="Node2D" parent="."]
 position = Vector2(45, 4)
 script = ExtResource("6_cth57")
 
 [node name="ScoreLabel" type="Label" parent="Level"]
-offset_left = 203.0
-offset_top = 116.0
-offset_right = 258.0
-offset_bottom = 139.0
+offset_left = 208.0
+offset_top = 93.0
+offset_right = 263.0
+offset_bottom = 116.0
 text = "0"
 horizontal_alignment = 1
 
@@ -180,15 +178,15 @@ text = "Score to beat:
 
 [node name="ComboLabel" type="Label" parent="Level"]
 show_behind_parent = true
-offset_left = 47.0
-offset_top = 360.0
-offset_right = 149.0
-offset_bottom = 403.0
+offset_left = 39.0
+offset_top = 359.0
+offset_right = 141.0
+offset_bottom = 402.0
 text = "10x combo"
 horizontal_alignment = 2
 
 [node name="ChargeBar" type="Sprite2D" parent="Level"]
-position = Vector2(327, 496)
+position = Vector2(-14, 530)
 rotation = -1.5708
 scale = Vector2(0.185128, 0.169164)
 texture = ExtResource("7_q2jha")
@@ -205,10 +203,10 @@ offset_bottom = 539.0
 text = "1 mult"
 
 [node name="SpinMoveLabel" type="Label" parent="Level"]
-offset_left = 62.0
-offset_top = 293.0
-offset_right = 142.0
-offset_bottom = 359.0
+offset_left = 69.0
+offset_top = 295.0
+offset_right = 149.0
+offset_bottom = 361.0
 theme_override_font_sizes/font_size = 21
 text = "T-spin
 Triple"
@@ -237,8 +235,16 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(546, 182)
 scale = Vector2(0.7, 0.7)
 
+[node name="ClearSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_i6gbm")
+volume_db = -10.712
+script = ExtResource("11_ux4dc")
+
+[node name="ComboBreakSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_ux4dc")
+volume_db = -25.0
+
 [connection signal="clear_lines_signal" from="GameBoard" to="." method="clear_lines"]
-[connection signal="clear_lines_signal" from="GameBoard" to="GameBoard/ClearSound" method="play_sound"]
 [connection signal="clear_lines_signal" from="GameBoard" to="Level/SpinMoveLabel" method="_on_tile_map_clear_lines_signal"]
 [connection signal="charge_attack" from="GameBoard/InputHandler" to="." method="use_charge"]
 [connection signal="hard_drop" from="GameBoard/InputHandler" to="GameBoard" method="hard_drop"]
@@ -255,5 +261,5 @@ scale = Vector2(0.7, 0.7)
 [connection signal="timeout" from="GameBoard/InputHandler/SDRTimer" to="GameBoard/InputHandler" method="_on_sdr_timer_timeout"]
 [connection signal="timeout" from="GameBoard/PieceDropTimer" to="GameBoard" method="_on_piece_drop_timer_timeout"]
 [connection signal="timeout" from="GameBoard/AutoLockTimer" to="GameBoard" method="auto_lock"]
-[connection signal="finished" from="GameBoard/ClearSound" to="GameBoard/ClearSound" method="_on_finished"]
 [connection signal="timeout" from="Level/SpinMoveLabel/FadeTimer" to="Level/SpinMoveLabel" method="_on_fade_timer_timeout"]
+[connection signal="finished" from="ClearSound" to="ClearSound" method="_on_finished"]
